@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burgundy Envelope - Step 1 (Plain)</title>
+    <title>Burgundy Scalloped Lace Floral Envelope</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #080506;
+            background-color: #060405;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,7 +36,7 @@
             border-radius: 14px;
         }
 
-        /* REVEALED CARD INSIDE */
+        /* REVEALED INNER CARD */
         .card-content {
             position: absolute;
             top: 0;
@@ -67,7 +67,7 @@
             font-weight: 700;
         }
 
-        /* ENVELOPE BASE CONTAINER */
+        /* ENVELOPE BASE CONTAINER WITH SEAMLESS FLORAL PATTERN */
         .envelope-container {
             position: absolute;
             top: 0;
@@ -87,7 +87,7 @@
             pointer-events: none;
         }
 
-        /* DIAGONAL OVERLAPPING FLAPS */
+        /* OVERLAPPING FLAPS */
         .flap-svg {
             position: absolute;
             width: 100%;
@@ -183,9 +183,38 @@
         <!-- BURGUNDY ENVELOPE -->
         <div class="envelope-container" id="envelope">
 
-            <!-- (REMOVED: EMBOSSED LEAF PATTERN DEFINITION) -->
+            <!-- REUSABLE SVG EMBOSSED FLORAL PATTERNS & FILTERS -->
+            <svg style="display: none;">
+                <defs>
+                    <!-- Real 3D Blind Embossing Filter -->
+                    <filter id="blindEmboss" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#5c1220" flood-opacity="0.9"/>
+                        <feDropShadow dx="-1" dy="-1" stdDeviation="0.8" flood-color="#1f0307" flood-opacity="0.9"/>
+                    </filter>
 
-            <!-- LEFT DIAGONAL FLAP -->
+                    <!-- Full Floral Brocade Motif -->
+                    <g id="floral-brocade" filter="url(#blindEmboss)">
+                        <!-- Main Blooming Flower -->
+                        <path d="M 50,50 C 40,30 60,20 70,35 C 80,20 100,30 90,50 C 105,60 95,80 75,75 C 65,90 45,80 50,60 C 35,50 40,35 50,50 Z" fill="#4a0c16"/>
+                        <circle cx="70" cy="52" r="8" fill="#30060d"/>
+                        <!-- Surrounding Leaves & Buds -->
+                        <path d="M 70,20 Q 80,0 90,10 Q 80,25 70,20 Z" fill="#420a13"/>
+                        <path d="M 95,40 Q 115,35 110,50 Q 95,50 95,40 Z" fill="#420a13"/>
+                        <path d="M 80,75 Q 90,95 75,100 Q 70,85 80,75 Z" fill="#420a13"/>
+                        <path d="M 45,65 Q 25,75 30,60 Q 45,55 45,65 Z" fill="#420a13"/>
+                        <!-- Dotted Stems -->
+                        <path d="M 70,100 Q 60,140 85,180" stroke="#4d0d18" stroke-width="2" stroke-dasharray="2 3" fill="none"/>
+                        <circle cx="85" cy="180" r="3" fill="#4d0d18"/>
+                    </g>
+
+                    <!-- Laser Cut Scalloped Border Hole-Punch Pattern -->
+                    <pattern id="scallopPunch" width="12" height="12" patternUnits="userSpaceOnUse">
+                        <circle cx="6" cy="6" r="2" fill="#000" opacity="0.4"/>
+                    </pattern>
+                </defs>
+            </svg>
+
+            <!-- LEFT SCALLOPED FLAP WITH FULL FLORAL EMBOSSING -->
             <div class="flap-svg flap-left-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
@@ -194,18 +223,30 @@
                             <stop offset="100%" stop-color="#2d050c"/>
                         </linearGradient>
                         <filter id="shadowLeft" x="-10%" y="-10%" width="130%" height="120%">
-                            <feDropShadow dx="8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
+                            <feDropShadow dx="8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.8"/>
                         </filter>
                     </defs>
 
-                    <!-- Flap Base Shape -->
-                    <path d="M 0,0 L 220,400 L 0,800 Z" fill="url(#leftGradBurgundy)" filter="url(#shadowLeft)"/>
+                    <!-- Laser Cut Scalloped Curved Flap Path -->
+                    <path d="M 0,0 
+                             C 80,80 120,120 160,200 
+                             C 180,240 210,320 230,400 
+                             C 210,480 180,560 160,600 
+                             C 120,680 80,720 0,800 Z" 
+                          fill="url(#leftGradBurgundy)" filter="url(#shadowLeft)"/>
 
-                    <!-- (REMOVED: distributed leaves) -->
+                    <!-- Laser-Cut Eyelet Hole Border along Scallop Curve -->
+                    <path d="M 0,0 C 80,80 120,120 160,200 C 180,240 210,320 230,400 C 210,480 180,560 160,600 C 120,680 80,720 0,800" 
+                          stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
+
+                    <!-- Full Floral Brocade Sprigs on Left Flap -->
+                    <use href="#floral-brocade" x="-10" y="20" transform="scale(1.1)"/>
+                    <use href="#floral-brocade" x="20" y="280" transform="scale(1.2) rotate(-10)"/>
+                    <use href="#floral-brocade" x="-15" y="520" transform="scale(1) rotate(15)"/>
                 </svg>
             </div>
 
-            <!-- RIGHT DIAGONAL FLAP -->
+            <!-- RIGHT SCALLOPED FLAP WITH FULL FLORAL EMBOSSING -->
             <div class="flap-svg flap-right-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
@@ -214,14 +255,26 @@
                             <stop offset="100%" stop-color="#28040a"/>
                         </linearGradient>
                         <filter id="shadowRight" x="-20%" y="-10%" width="130%" height="120%">
-                            <feDropShadow dx="-8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
+                            <feDropShadow dx="-8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.8"/>
                         </filter>
                     </defs>
 
-                    <!-- Flap Base Shape -->
-                    <path d="M 400,0 L 180,400 L 400,800 Z" fill="url(#rightGradBurgundy)" filter="url(#shadowRight)"/>
+                    <!-- Laser Cut Scalloped Curved Flap Path -->
+                    <path d="M 400,0 
+                             C 320,80 280,120 240,200 
+                             C 220,240 190,320 170,400 
+                             C 190,480 220,560 240,600 
+                             C 280,680 320,720 400,800 Z" 
+                          fill="url(#rightGradBurgundy)" filter="url(#shadowRight)"/>
 
-                    <!-- (REMOVED: distributed leaves) -->
+                    <!-- Laser-Cut Eyelet Hole Border along Scallop Curve -->
+                    <path d="M 400,0 C 320,80 280,120 240,200 C 220,240 190,320 170,400 C 190,480 220,560 240,600 C 280,680 320,720 400,800" 
+                          stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
+
+                    <!-- Full Floral Brocade Sprigs on Right Flap -->
+                    <use href="#floral-brocade" x="180" y="40" transform="scale(-1.1, 1.1) translate(-350, 0)"/>
+                    <use href="#floral-brocade" x="150" y="300" transform="scale(-1.2, 1.2) translate(-320, 0) rotate(10)"/>
+                    <use href="#floral-brocade" x="170" y="540" transform="scale(-1, 1) translate(-350, 0) rotate(-15)"/>
                 </svg>
             </div>
 
