@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olive Embossed Leaf Envelope - Step 1</title>
+    <title>Burgundy Blind-Embossed Leaf Envelope - Step 1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #0c0f0a;
+            background-color: #080506;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,8 +49,8 @@
             align-items: center;
             padding: 30px;
             text-align: center;
-            color: #2e3b26;
-            background: radial-gradient(circle at center, #fffefb 0%, #f1efe6 100%);
+            color: #4a0d18;
+            background: radial-gradient(circle at center, #fffefb 0%, #f3ece1 100%);
             transform: scale(0.95) translateY(20px);
             opacity: 0;
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease 0.3s;
@@ -67,14 +67,14 @@
             font-weight: 700;
         }
 
-        /* ENVELOPE BASE */
+        /* ENVELOPE BASE CONTAINER */
         .envelope-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #4a5440;
+            background-color: #3b0911;
             z-index: 10;
             perspective: 1200px;
             pointer-events: auto;
@@ -87,20 +87,20 @@
             pointer-events: none;
         }
 
-        /* FINE FINE TEXTURED PAPER GRAIN */
+        /* FINE PAPER TEXTURE OVERLAY */
         .paper-grain {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: 8;
             pointer-events: none;
-            opacity: 0.22;
+            opacity: 0.2;
             background-image: radial-gradient(#ffffff 0.8px, transparent 0.8px), radial-gradient(#000000 0.8px, transparent 0.8px);
             background-size: 4px 4px;
             mix-blend-mode: overlay;
         }
 
-        /* ENVELOPE FLAPS (LEFT & RIGHT DIAGONAL) */
+        /* DIAGONAL OVERLAPPING FLAPS */
         .flap-svg {
             position: absolute;
             width: 100%;
@@ -129,7 +129,7 @@
             transform: rotateY(160deg);
         }
 
-        /* CREAM & GOLD WAX SEAL WITH "SM" MONOGRAM */
+        /* CREAM WAX SEAL WITH "SM" MONOGRAM */
         .wax-seal {
             position: absolute;
             top: 50%;
@@ -193,20 +193,21 @@
 
     <div class="viewport">
         
-        <!-- OLIVE GREEN EMBOSSED LEAF ENVELOPE -->
+        <!-- BURGUNDY BLIND-EMBOSSED ENVELOPE -->
         <div class="envelope-container" id="envelope">
             <div class="paper-grain"></div>
 
-            <!-- EMBOSSED LEAF BRANCH SVG PATTERN DEFINITION -->
+            <!-- TONE-ON-TONE EMBOSSED LEAF PATTERN DEFINITION -->
             <svg style="display: none;">
                 <defs>
-                    <!-- Embossed Gold Leaf Branch Symbol -->
-                    <g id="leaf-branch">
-                        <!-- Main Stem -->
-                        <path d="M 0,200 Q 50,120 120,0" stroke="#bda570" stroke-width="2.5" fill="none" 
-                              filter="drop-shadow(1px 1px 1px rgba(0,0,0,0.6))"/>
-                        <!-- Leaves with Inner Vein Lines -->
-                        <g fill="#a38c58" stroke="#685630" stroke-width="0.8">
+                    <!-- Tone-on-tone Embossed Leaf Branch Motif -->
+                    <g id="embossed-leaf-branch">
+                        <!-- Stem Highlight & Shadow -->
+                        <path d="M 0,200 Q 50,120 120,0" stroke="#5e1522" stroke-width="2.5" fill="none"/>
+                        <path d="M 1,201 Q 51,121 121,1" stroke="#210307" stroke-width="2" fill="none"/>
+                        
+                        <!-- Leaves with Subtle Bevel Shadows -->
+                        <g fill="#420b13" stroke="#5e1522" stroke-width="0.8">
                             <!-- Leaf 1 -->
                             <path d="M 20,170 Q 5,150 30,140 Q 40,165 20,170 Z"/>
                             <!-- Leaf 2 -->
@@ -228,21 +229,21 @@
             <div class="flap-svg flap-left-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
-                        <linearGradient id="leftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#56614b"/>
-                            <stop offset="100%" stop-color="#3c4434"/>
+                        <linearGradient id="leftGradBurgundy" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4d0c17"/>
+                            <stop offset="100%" stop-color="#2d050c"/>
                         </linearGradient>
                         <filter id="shadowLeft" x="-10%" y="-10%" width="130%" height="120%">
-                            <feDropShadow dx="8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.6"/>
+                            <feDropShadow dx="8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
                         </filter>
                     </defs>
 
-                    <!-- Flap Shape -->
-                    <path d="M 0,0 L 220,400 L 0,800 Z" fill="url(#leftGrad)" filter="url(#shadowLeft)"/>
+                    <!-- Flap Base Shape -->
+                    <path d="M 0,0 L 220,400 L 0,800 Z" fill="url(#leftGradBurgundy)" filter="url(#shadowLeft)"/>
 
-                    <!-- Embossed Branch Motifs on Left Flap -->
-                    <use href="#leaf-branch" x="10" y="50" transform="scale(1.2)"/>
-                    <use href="#leaf-branch" x="-30" y="380" transform="scale(1.4) rotate(-20)"/>
+                    <!-- Tone-on-tone Embossed Branches -->
+                    <use href="#embossed-leaf-branch" x="10" y="50" transform="scale(1.2)"/>
+                    <use href="#embossed-leaf-branch" x="-30" y="380" transform="scale(1.4) rotate(-20)"/>
                 </svg>
             </div>
 
@@ -250,25 +251,25 @@
             <div class="flap-svg flap-right-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
-                        <linearGradient id="rightGrad" x1="100%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#505b45"/>
-                            <stop offset="100%" stop-color="#343c2d"/>
+                        <linearGradient id="rightGradBurgundy" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#470a14"/>
+                            <stop offset="100%" stop-color="#28040a"/>
                         </linearGradient>
                         <filter id="shadowRight" x="-20%" y="-10%" width="130%" height="120%">
-                            <feDropShadow dx="-8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.6"/>
+                            <feDropShadow dx="-8" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
                         </filter>
                     </defs>
 
-                    <!-- Flap Shape -->
-                    <path d="M 400,0 L 180,400 L 400,800 Z" fill="url(#rightGrad)" filter="url(#shadowRight)"/>
+                    <!-- Flap Base Shape -->
+                    <path d="M 400,0 L 180,400 L 400,800 Z" fill="url(#rightGradBurgundy)" filter="url(#shadowRight)"/>
 
-                    <!-- Embossed Branch Motifs on Right Flap -->
-                    <use href="#leaf-branch" x="180" y="80" transform="scale(-1, 1) translate(-400, 0)"/>
-                    <use href="#leaf-branch" x="160" y="420" transform="scale(-1.3, 1.3) translate(-350, 0) rotate(15)"/>
+                    <!-- Tone-on-tone Embossed Branches -->
+                    <use href="#embossed-leaf-branch" x="180" y="80" transform="scale(-1, 1) translate(-400, 0)"/>
+                    <use href="#embossed-leaf-branch" x="160" y="420" transform="scale(-1.3, 1.3) translate(-350, 0) rotate(15)"/>
                 </svg>
             </div>
 
-            <!-- WAX SEAL -->
+            <!-- CREAM WAX SEAL WITH "SM" MONOGRAM -->
             <div class="wax-seal" onclick="openEnvelope()">
                 <div class="wax-seal-inner">
                     <span class="monogram-sm">SM</span>
@@ -279,299 +280,7 @@
         <!-- REVEALED CARD -->
         <div class="card-content">
             <h2>STEP 1 COMPLETE</h2>
-            <p style="margin-top: 10px; font-size: 13px; color: #4a5440; font-family: sans-serif;">Ready for Step 2!</p>
-        </div>
-
-    </div>
-
-    <script>
-        function openEnvelope() {
-            document.getElementById('envelope').classList.add('open');
-        }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Burgundy Lace Envelope - Step 1</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #050304;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Cinzel', serif;
-            overflow: hidden;
-        }
-
-        .viewport {
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            max-height: 800px;
-            position: relative;
-            background-color: #f7f3ed;
-            overflow: hidden;
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95);
-            border-radius: 14px;
-        }
-
-        /* CARD BEHIND ENVELOPE */
-        .card-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            text-align: center;
-            color: #4a0e17;
-            background: radial-gradient(circle at center, #fffefb 0%, #f3ece1 100%);
-            transform: scale(0.95) translateY(20px);
-            opacity: 0;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease 0.3s;
-        }
-
-        .envelope-container.open ~ .card-content {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-
-        .card-content h2 {
-            font-size: 26px;
-            letter-spacing: 3px;
-            font-weight: 700;
-        }
-
-        /* ENVELOPE BASE */
-        .envelope-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #2b050a;
-            z-index: 10;
-            perspective: 1200px;
-            pointer-events: auto;
-            transition: opacity 0.8s ease 0.6s, visibility 0.8s ease 0.6s;
-        }
-
-        .envelope-container.open {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* FINE PAPER GRAIN OVERLAY */
-        .paper-grain {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 8;
-            pointer-events: none;
-            opacity: 0.15;
-            background-image: radial-gradient(#ffffff 0.8px, transparent 0.8px), radial-gradient(#000000 0.8px, transparent 0.8px);
-            background-size: 4px 4px;
-            mix-blend-mode: overlay;
-        }
-
-        /* ELEGANT VECTOR LACE FLAPS */
-        .flap-svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-
-        .flap-top-container {
-            z-index: 5;
-            transform-origin: top center;
-        }
-
-        .flap-bottom-container {
-            z-index: 4;
-            transform-origin: bottom center;
-        }
-
-        .envelope-container.open .flap-top-container {
-            transform: rotateX(170deg);
-        }
-
-        .envelope-container.open .flap-bottom-container {
-            transform: rotateX(-170deg);
-        }
-
-        /* WAX SEAL */
-        .wax-seal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 110px;
-            height: 110px;
-            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f7f1e3 40%, #e2d3bb 75%, #b29e80 100%);
-            border-radius: 45% 55% 48% 52% / 53% 47% 53% 47%;
-            box-shadow: 
-                0 14px 30px rgba(0, 0, 0, 0.85),
-                inset 0 4px 6px rgba(255, 255, 255, 1),
-                inset 0 -5px 8px rgba(100, 85, 65, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 20;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-            will-change: transform, opacity;
-        }
-
-        .wax-seal:hover {
-            transform: translate(-50%, -50%) scale(1.06);
-            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.95);
-        }
-
-        .envelope-container.open .wax-seal {
-            transform: translate(-50%, -50%) scale(0.6);
-            opacity: 0;
-        }
-
-        .wax-seal-inner {
-            width: 82px;
-            height: 82px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 40% 40%, #faf6ee 0%, #ebe0cd 80%, #caa486 100%);
-            border: 1px solid rgba(180, 160, 135, 0.45);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 
-                inset 0 3px 6px rgba(0, 0, 0, 0.25),
-                0 1px 2px rgba(255, 255, 255, 0.8);
-        }
-
-        .monogram-sm {
-            font-family: 'Great Vibes', cursive;
-            font-size: 42px;
-            color: #6b5840;
-            text-shadow: 
-                1px 1px 0px rgba(255, 255, 255, 0.9),
-                -1px -1px 1px rgba(0, 0, 0, 0.3);
-            letter-spacing: -2px;
-            user-select: none;
-            margin-top: -4px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="viewport">
-        
-        <!-- BURGUNDY LACE ENVELOPE -->
-        <div class="envelope-container" id="envelope">
-            <div class="paper-grain"></div>
-
-            <!-- TOP SCALLOPED FLAP WITH EMBOSSED FLORAL LACE -->
-            <div class="flap-svg flap-top-container">
-                <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="topGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#540d18"/>
-                            <stop offset="100%" stop-color="#30050b"/>
-                        </linearGradient>
-                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#f5d77f"/>
-                            <stop offset="50%" stop-color="#d4af37"/>
-                            <stop offset="100%" stop-color="#aa820a"/>
-                        </linearGradient>
-                        <filter id="shadowTop" x="-10%" y="-10%" width="120%" height="130%">
-                            <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
-                        </filter>
-                    </defs>
-
-                    <!-- Base Flap Body -->
-                    <path id="topFlapPath" d="M 0,0 L 400,0 L 400,270 C 350,320 300,310 270,350 C 240,390 220,420 200,420 C 180,420 160,390 130,350 C 100,310 50,320 0,270 Z" 
-                          fill="url(#topGradient)" filter="url(#shadowTop)"/>
-
-                    <!-- Fine Metallic Gold Trim Line -->
-                    <path d="M 0,265 C 50,315 100,305 130,345 C 160,385 180,415 200,415 C 220,415 240,385 270,345 C 300,305 350,315 400,265" 
-                          stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.85"/>
-
-                    <!-- Delicate Floral Lace Filigree Overlay -->
-                    <g fill="none" stroke="url(#goldGradient)" stroke-width="0.75" opacity="0.35">
-                        <circle cx="200" cy="380" r="15"/>
-                        <circle cx="200" cy="380" r="22" stroke-dasharray="2 3"/>
-                        <path d="M 200,340 C 190,360 190,400 200,420 C 210,400 210,360 200,340 Z"/>
-                        <path d="M 160,380 C 180,370 220,370 240,380 C 220,390 180,390 160,380 Z"/>
-                        <path d="M 140,320 Q 170,340 200,320 Q 230,340 260,320" />
-                        <path d="M 100,280 Q 150,310 200,280 Q 250,310 300,280" />
-                    </g>
-                </svg>
-            </div>
-
-            <!-- BOTTOM SCALLOPED FLAP WITH EMBOSSED FLORAL LACE -->
-            <div class="flap-svg flap-bottom-container">
-                <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="bottomGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                            <stop offset="0%" stop-color="#540d18"/>
-                            <stop offset="100%" stop-color="#210307"/>
-                        </linearGradient>
-                        <filter id="shadowBottom" x="-10%" y="-30%" width="120%" height="130%">
-                            <feDropShadow dx="0" dy="-10" stdDeviation="8" flood-color="#000" flood-opacity="0.75"/>
-                        </filter>
-                    </defs>
-
-                    <!-- Base Flap Body -->
-                    <path d="M 0,800 L 400,800 L 400,530 C 350,480 300,490 270,450 C 240,410 220,380 200,380 C 180,380 160,410 130,450 C 100,490 50,480 0,530 Z" 
-                          fill="url(#bottomGradient)" filter="url(#shadowBottom)"/>
-
-                    <!-- Fine Metallic Gold Trim Line -->
-                    <path d="M 0,535 C 50,485 100,495 130,455 C 160,415 180,385 200,385 C 220,385 240,415 270,455 C 300,495 350,485 400,535" 
-                          stroke="url(#goldGradient)" stroke-width="2" fill="none" opacity="0.85"/>
-
-                    <!-- Delicate Floral Lace Filigree Overlay -->
-                    <g fill="none" stroke="url(#goldGradient)" stroke-width="0.75" opacity="0.35">
-                        <circle cx="200" cy="420" r="15"/>
-                        <circle cx="200" cy="420" r="22" stroke-dasharray="2 3"/>
-                        <path d="M 200,380 C 190,400 190,440 200,460 C 210,440 210,400 200,380 Z"/>
-                        <path d="M 160,420 C 180,410 220,410 240,420 C 220,430 180,430 160,420 Z"/>
-                        <path d="M 140,480 Q 170,460 200,480 Q 230,460 260,480" />
-                        <path d="M 100,520 Q 150,490 200,520 Q 250,490 300,520" />
-                    </g>
-                </svg>
-            </div>
-
-            <!-- WAX SEAL -->
-            <div class="wax-seal" onclick="openEnvelope()">
-                <div class="wax-seal-inner">
-                    <span class="monogram-sm">SM</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- REVEALED CARD -->
-        <div class="card-content">
-            <h2>STEP 1 COMPLETE</h2>
-            <p style="margin-top: 10px; font-size: 13px; color: #7a323c; font-family: sans-serif;">Ready for Step 2!</p>
+            <p style="margin-top: 10px; font-size: 13px; color: #4a0d18; font-family: sans-serif;">Ready for Step 2!</p>
         </div>
 
     </div>
