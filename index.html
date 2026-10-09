@@ -3,20 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diana & Richard - Wedding Invitation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Olive Green Butterfly Envelope</title>
     <style>
-        :root {
-            --blush-pink: #f8ecee;
-            --dusty-rose: #d8a7b1;
-            --deep-rose: #b57c88;
-            --gold: #d4af37;
-            --dark-text: #4a3e3d;
-            --light-bg: #fdfbfb;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -24,366 +12,201 @@
         }
 
         body {
-            background-color: #1a1a1a;
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--dark-text);
+            background-color: #121512;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            font-family: sans-serif;
+            overflow: hidden;
         }
 
-        /* Mobile Viewport Container */
-        .phone-frame {
+        /* Mobile Frame Screen */
+        .viewport {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             height: 100vh;
-            max-height: 880px;
-            background-color: var(--light-bg);
+            max-height: 800px;
             position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            scroll-behavior: smooth;
+            background-color: #f4efe6;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
         }
 
-        /* Hide scrollbars */
-        .phone-frame::-webkit-scrollbar {
-            display: none;
-        }
-        .phone-frame {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* ENVELOPE OVERLAY */
-        .envelope-wrapper {
+        /* ENVELOPE BASE */
+        .envelope-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #e8d3d8;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+            background-color: #4a5043;
+            /* Embossed Leaf Pattern Background */
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 2px, transparent 40px),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06) 2px, transparent 40px);
+            z-index: 10;
+            transition: transform 1s ease-in-out, opacity 0.8s ease;
         }
 
-        .envelope-wrapper.open {
-            transform: translateY(-100%);
+        .envelope-container.open {
+            transform: scale(1.1);
             opacity: 0;
             pointer-events: none;
         }
 
-        .envelope {
-            width: 85%;
-            height: 380px;
-            background: #f1dadf;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 40px;
-            text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+        /* EMBOSSED LEAF PATTERN OVERLAY */
+        .leaf-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.25;
+            pointer-events: none;
         }
 
-        .envelope-flap {
+        /* LEFT & RIGHT TRIANGULAR FLAPS */
+        .flap-left {
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 0;
-            border-left: 178px solid transparent;
-            border-right: 178px solid transparent;
-            border-top: 180px solid #e2c2c9;
-            transform-origin: top;
-            transition: transform 0.6s ease;
+            border-top: 400px solid transparent;
+            border-bottom: 400px solid transparent;
+            border-left: 210px solid #3f4538;
+            filter: drop-shadow(4px 0px 8px rgba(0, 0, 0, 0.35));
+            transition: transform 0.8s ease-in-out;
+            transform-origin: left;
         }
 
+        .flap-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 400px solid transparent;
+            border-bottom: 400px solid transparent;
+            border-right: 210px solid #454b3d;
+            filter: drop-shadow(-4px 0px 8px rgba(0, 0, 0, 0.35));
+            transition: transform 0.8s ease-in-out;
+            transform-origin: right;
+        }
+
+        .envelope-container.open .flap-left {
+            transform: rotateY(-120deg);
+        }
+
+        .envelope-container.open .flap-right {
+            transform: rotateY(120deg);
+        }
+
+        /* GOLD BUTTERFLY WAX SEAL */
         .wax-seal {
             position: absolute;
-            top: 140px;
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #d4af37, #aa820a);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 35% 35%, #e8c76b, #b38728 60%, #7d5910 100%);
             border-radius: 50%;
+            box-shadow: 
+                0 6px 15px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            font-family: 'Alex Brush', cursive;
-            font-size: 26px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
             cursor: pointer;
-            z-index: 10;
-            border: 2px solid #f9ebbe;
-            transition: transform 0.2s ease;
+            z-index: 20;
+            border: 3px solid #a67c1e;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .wax-seal:hover {
-            transform: scale(1.05);
+            transform: translate(-50%, -50%) scale(1.06);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
-        .envelope-text {
-            font-family: 'Alex Brush', cursive;
-            font-size: 28px;
-            color: #7a5860;
-            padding: 0 20px;
-        }
-
-        /* CARD SECTIONS */
-        .section {
-            padding: 40px 24px;
-            text-align: center;
-            position: relative;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(180deg, rgba(248,236,238,0.6) 0%, rgba(253,251,251,1) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 50px 20px;
-        }
-
-        .monogram-crest {
-            width: 70px;
-            height: 70px;
-            border: 1px solid var(--dusty-rose);
-            border-radius: 50%;
-            margin: 0 auto 15px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Alex Brush', cursive;
-            font-size: 30px;
-            color: var(--deep-rose);
-        }
-
-        .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #8c7378;
-            margin-bottom: 12px;
-        }
-
-        .couple-names {
-            font-family: 'Alex Brush', cursive;
-            font-size: 48px;
-            color: var(--deep-rose);
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        /* Embedded Illustration Container */
-        .illustration-card {
-            width: 100%;
-            height: 200px;
-            background-color: #fceef0;
-            border-radius: 120px 120px 0 0;
-            border: 1px solid var(--dusty-rose);
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .date-box {
-            border-top: 1px solid var(--dusty-rose);
-            border-bottom: 1px solid var(--dusty-rose);
-            padding: 15px 0;
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        .date-main {
-            font-size: 32px;
-            letter-spacing: 2px;
-            font-weight: 600;
-            color: var(--dark-text);
-        }
-
-        .venue-title {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-
-        .venue-sub {
-            font-size: 14px;
-            font-style: italic;
-            color: #6e5c5f;
-        }
-
-        /* Countdown Section */
-        .countdown-section {
-            background-color: var(--blush-pink);
-            border-radius: 12px;
-            margin: 20px;
-            padding: 30px 20px;
-        }
-
-        .timer-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .time-box {
-            background: #fff;
-            padding: 12px 8px;
-            border-radius: 8px;
-            min-width: 65px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .time-number {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--deep-rose);
-        }
-
-        .time-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #8c7378;
-        }
-
-        /* Schedule Section */
-        .timeline {
-            margin-top: 25px;
-            position: relative;
-            text-align: left;
-            padding-left: 20px;
-        }
-
-        .timeline::before {
+        .wax-seal::before {
             content: '';
             position: absolute;
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(255, 255, 255, 0.35);
+        }
+
+        /* BUTTERFLY & LAUREL SVG */
+        .seal-icon {
+            width: 55px;
+            height: 55px;
+            fill: #523b0a;
+            filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.3));
+        }
+
+        /* PLACEHOLDER INSIDE CARD (REVEALED ON CLICK) */
+        .card-content {
+            position: absolute;
+            top: 0;
             left: 0;
-            top: 5px;
-            bottom: 5px;
-            width: 1px;
-            background-color: var(--dusty-rose);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 25px;
-            padding-left: 15px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 6px;
-            width: 7px;
-            height: 7px;
-            background-color: var(--deep-rose);
-            border-radius: 50%;
-        }
-
-        .timeline-time {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
-            color: var(--deep-rose);
-            font-weight: 500;
-        }
-
-        .timeline-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        /* RSVP Section */
-        .rsvp-form {
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            color: #3b4035;
         }
 
-        .rsvp-input, .rsvp-select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--dusty-rose);
-            border-radius: 6px;
-            background-color: #fff;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .rsvp-button {
-            background-color: var(--deep-rose);
-            color: #fff;
-            border: none;
-            padding: 14px;
-            border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
+        .card-content h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 300;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .rsvp-button:hover {
-            background-color: #985f6a;
         }
     </style>
 </head>
 <body>
 
-    <div class="phone-frame">
-
-        <!-- OVERLAY ENVELOPE -->
-        <div class="envelope-wrapper" id="envelopeWrapper">
-            <div class="envelope">
-                <div class="envelope-flap"></div>
-                <div class="wax-seal" onclick="openEnvelope()">D&R</div>
-                <div class="envelope-text">Requests the pleasure of your company</div>
-            </div>
+    <div class="viewport">
+        <!-- CARD CONTENT HIDDEN BEHIND ENVELOPE -->
+        <div class="card-content">
+            <h2>STEP 1 COMPLETE</h2>
+            <p>Ready for Step 2!</p>
         </div>
 
-        <!-- HERO SECTION -->
-        <section class="section hero">
-            <div>
-                <div class="monogram-crest">D&R</div>
-                <p class="subtitle">We request the pleasure of your company</p>
-                <h1 class="couple-names">Diana & Richard</h1>
-                <p class="subtitle">To celebrate our wedding</p>
-            </div>
+        <!-- OLIVE GREEN ENVELOPE -->
+        <div class="envelope-container" id="envelope">
+            <!-- EMBOSSED LEAF PATTERNS -->
+            <svg class="leaf-pattern" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M10,20 Q30,10 50,30 T90,20" stroke="white" stroke-width="0.5" fill="none"/>
+                <path d="M5,70 Q25,60 45,80 T85,70" stroke="white" stroke-width="0.5" fill="none"/>
+            </svg>
 
-            <!-- EMBEDDED VECTOR ILLUSTRATION -->
-            <div class="illustration-card">
-                <svg width="200" height="150" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hotel/Villa Facade -->
-                    <rect x="50" y="50" width="100" height="70" fill="#f8ecee" stroke="#b57c88" stroke-width="1.5"/>
-                    <polygon points="40,50 100,20 160,50" fill="#f1dadf" stroke="#b57c88" stroke-width="1.5"/>
-                    <!-- Columns -->
-                    <line x1="65" y1="50" x2="65" y2="120" stroke="#b57c88" stroke-width="1.5"/>
-                    <line x1="85" y1="50" x2="85" y2="120" stroke="#b57c88" stroke-width="1.5"/>
-                    <line x1="115" y1="50" x2="115" y2="120" stroke="#b57c88" stroke-width="1.5"/>
-                    <line x1="135" y1="50" x2="135" y2="120" stroke="#b57c88" stroke-width="1.5"/>
-                    <!-- Entrance Arch -->
-                    <path d="M90 120 V95 A10 10 0 0 1 110 95 V120 Z" fill="#e8d3d8" stroke="#b57c88" stroke-width="1.5"/>
-                    <!-- Botanical Flourishes -->
-                    <circle cx="40" cy="110" r="12
+            <div class="flap-left"></div>
+            <div class="flap-right"></div>
+
+            <!-- BUTTERFLY WAX SEAL -->
+            <div class="wax-seal" onclick="openEnvelope()">
+                <svg class="seal-icon" viewBox="0 0 24 24">
+                    <!-- Laurel Wreath -->
+                    <path d="M6 15C5 12 6 8 8 6M18 15C19 12 18 8 16 6" stroke="#523b0a" stroke-width="1" fill="none"/>
+                    <!-- Butterfly -->
+                    <path d="M12 9 C11 7, 7 5, 6 9 C5 12, 9 14, 12 11 M12 9 C13 7, 17 5, 18 9 C19 12, 15 14, 12 11 M12 11 C10 13, 8 17, 11 18 C13 18, 12 14, 12 11 M12 11 C14 13, 16 17, 13 18 C11 18, 12 14, 12 11 M12 7 V15"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.getElementById('envelope').classList.add('open');
+        }
+    </script>
+</body>
+</html>
