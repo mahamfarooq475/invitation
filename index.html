@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burgundy Scalloped Lace Floral Envelope</title>
+    <title>Maham & Shiraz Wedding Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -15,7 +15,7 @@
         }
 
         body {
-            background-color: #060405;
+            background-color: #050304;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,17 +26,19 @@
 
         .viewport {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             height: 100vh;
-            max-height: 800px;
+            max-height: 850px;
             position: relative;
-            background-color: #f7f3ed;
+            background-color: #1a0307;
             overflow: hidden;
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95);
-            border-radius: 14px;
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95);
+            border-radius: 16px;
         }
 
-        /* REVEALED INNER CARD */
+        /* ----------------------------------
+           HEAVENLY INSIDE CARD ANIMATION
+        ----------------------------------- */
         .card-content {
             position: absolute;
             top: 0;
@@ -47,27 +49,126 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 40px 25px;
             text-align: center;
-            color: #4a0d18;
-            background: radial-gradient(circle at center, #fffefb 0%, #f3ece1 100%);
-            transform: scale(0.95) translateY(20px);
+            background: radial-gradient(circle at 50% 30%, #3a0812 0%, #170206 70%, #080002 100%);
+            z-index: 1;
             opacity: 0;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease 0.3s;
+            transform: scale(0.92);
+            transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease 0.4s;
+            overflow: hidden;
         }
 
         .envelope-container.open ~ .card-content {
-            transform: scale(1) translateY(0);
             opacity: 1;
+            transform: scale(1);
         }
 
-        .card-content h2 {
-            font-size: 26px;
+        /* Canvas Particle & Cloud Engine Background */
+        #heavenCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Heavenly Ray Beams */
+        .god-rays {
+            position: absolute;
+            top: -20%;
+            left: -50%;
+            width: 200%;
+            height: 140%;
+            background: repeating-conic-gradient(
+                from 0deg at 50% 0%,
+                rgba(255, 235, 180, 0.08) 0deg 15deg,
+                transparent 15deg 35deg
+            );
+            animation: rotateRays 40s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+            filter: blur(10px);
+        }
+
+        @keyframes rotateRays {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Text Backdrop Backdrop Shield */
+        .text-backdrop {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 30px 20px;
+            background: radial-gradient(ellipse at center, rgba(35, 4, 10, 0.85) 0%, rgba(20, 2, 5, 0.6) 60%, transparent 100%);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+        }
+
+        .sub-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #d8c29d;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        /* CLEAR HIGH-CONTRAST NAMES */
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 52px;
+            line-height: 1.25;
+            margin: 10px 0;
+            
+            /* High Contrast Solid Gold Gradient */
+            background: linear-gradient(180deg, #ffffff 0%, #fff2d1 30%, #eac275 70%, #ba8a38 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Sharp Dark Glow Outline for Maximum Legibility */
+            filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 1))
+                    drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.9))
+                    drop-shadow(0px 0px 25px rgba(220, 175, 90, 0.4));
+            
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s, opacity 1.2s ease 0.8s;
+        }
+
+        .ampersand {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 400;
+            display: block;
+            margin: 8px 0;
+            color: #f3dfba;
+            -webkit-text-fill-color: #f3dfba;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        }
+
+        .envelope-container.open ~ .card-content .couple-names {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .date-location {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
             letter-spacing: 3px;
-            font-weight: 700;
+            color: #e5d2b3;
+            margin-top: 25px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
         }
 
-        /* ENVELOPE BASE CONTAINER WITH SEAMLESS FLORAL PATTERN */
+        /* ----------------------------------
+           ENVELOPE STRUCTURE & FLAPS
+        ----------------------------------- */
         .envelope-container {
             position: absolute;
             top: 0;
@@ -76,9 +177,9 @@
             height: 100%;
             background-color: #3b0911;
             z-index: 10;
-            perspective: 1200px;
+            perspective: 1400px;
             pointer-events: auto;
-            transition: opacity 0.8s ease 0.6s, visibility 0.8s ease 0.6s;
+            transition: opacity 0.8s ease 0.8s, visibility 0.8s ease 0.8s;
         }
 
         .envelope-container.open {
@@ -87,14 +188,13 @@
             pointer-events: none;
         }
 
-        /* OVERLAPPING FLAPS */
         .flap-svg {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
         }
 
@@ -109,14 +209,14 @@
         }
 
         .envelope-container.open .flap-left-container {
-            transform: rotateY(-160deg);
+            transform: rotateY(-165deg);
         }
 
         .envelope-container.open .flap-right-container {
-            transform: rotateY(160deg);
+            transform: rotateY(165deg);
         }
 
-        /* CREAM WAX SEAL WITH "SM" MONOGRAM */
+        /* CREAM WAX SEAL */
         .wax-seal {
             position: absolute;
             top: 50%;
@@ -127,7 +227,7 @@
             background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f7f1e3 40%, #e2d3bb 75%, #b29e80 100%);
             border-radius: 45% 55% 48% 52% / 53% 47% 53% 47%;
             box-shadow: 
-                0 14px 30px rgba(0, 0, 0, 0.85),
+                0 16px 36px rgba(0, 0, 0, 0.85),
                 inset 0 4px 6px rgba(255, 255, 255, 1),
                 inset 0 -5px 8px rgba(100, 85, 65, 0.5);
             display: flex;
@@ -141,7 +241,7 @@
 
         .wax-seal:hover {
             transform: translate(-50%, -50%) scale(1.06);
-            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.95);
+            box-shadow: 0 20px 42px rgba(0, 0, 0, 0.95);
         }
 
         .envelope-container.open .wax-seal {
@@ -180,41 +280,31 @@
 
     <div class="viewport">
         
-        <!-- BURGUNDY ENVELOPE -->
+        <!-- BURGUNDY ENVELOPE BASE -->
         <div class="envelope-container" id="envelope">
 
-            <!-- REUSABLE SVG EMBOSSED FLORAL PATTERNS & FILTERS -->
+            <!-- EMBOSSED FLORAL PATTERNS & FILTERS -->
             <svg style="display: none;">
                 <defs>
-                    <!-- Real 3D Blind Embossing Filter -->
                     <filter id="blindEmboss" x="-20%" y="-20%" width="140%" height="140%">
                         <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#5c1220" flood-opacity="0.9"/>
                         <feDropShadow dx="-1" dy="-1" stdDeviation="0.8" flood-color="#1f0307" flood-opacity="0.9"/>
                     </filter>
 
-                    <!-- Full Floral Brocade Motif -->
                     <g id="floral-brocade" filter="url(#blindEmboss)">
-                        <!-- Main Blooming Flower -->
                         <path d="M 50,50 C 40,30 60,20 70,35 C 80,20 100,30 90,50 C 105,60 95,80 75,75 C 65,90 45,80 50,60 C 35,50 40,35 50,50 Z" fill="#4a0c16"/>
                         <circle cx="70" cy="52" r="8" fill="#30060d"/>
-                        <!-- Surrounding Leaves & Buds -->
                         <path d="M 70,20 Q 80,0 90,10 Q 80,25 70,20 Z" fill="#420a13"/>
                         <path d="M 95,40 Q 115,35 110,50 Q 95,50 95,40 Z" fill="#420a13"/>
                         <path d="M 80,75 Q 90,95 75,100 Q 70,85 80,75 Z" fill="#420a13"/>
                         <path d="M 45,65 Q 25,75 30,60 Q 45,55 45,65 Z" fill="#420a13"/>
-                        <!-- Dotted Stems -->
                         <path d="M 70,100 Q 60,140 85,180" stroke="#4d0d18" stroke-width="2" stroke-dasharray="2 3" fill="none"/>
                         <circle cx="85" cy="180" r="3" fill="#4d0d18"/>
                     </g>
-
-                    <!-- Laser Cut Scalloped Border Hole-Punch Pattern -->
-                    <pattern id="scallopPunch" width="12" height="12" patternUnits="userSpaceOnUse">
-                        <circle cx="6" cy="6" r="2" fill="#000" opacity="0.4"/>
-                    </pattern>
                 </defs>
             </svg>
 
-            <!-- LEFT SCALLOPED FLAP WITH FULL FLORAL EMBOSSING -->
+            <!-- LEFT FLAP -->
             <div class="flap-svg flap-left-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
@@ -227,26 +317,16 @@
                         </filter>
                     </defs>
 
-                    <!-- Laser Cut Scalloped Curved Flap Path -->
-                    <path d="M 0,0 
-                             C 80,80 120,120 160,200 
-                             C 180,240 210,320 230,400 
-                             C 210,480 180,560 160,600 
-                             C 120,680 80,720 0,800 Z" 
-                          fill="url(#leftGradBurgundy)" filter="url(#shadowLeft)"/>
+                    <path d="M 0,0 C 80,80 120,120 160,200 C 180,240 210,320 230,400 C 210,480 180,560 160,600 C 120,680 80,720 0,800 Z" fill="url(#leftGradBurgundy)" filter="url(#shadowLeft)"/>
+                    <path d="M 0,0 C 80,80 120,120 160,200 C 180,240 210,320 230,400 C 210,480 180,560 160,600 C 120,680 80,720 0,800" stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
 
-                    <!-- Laser-Cut Eyelet Hole Border along Scallop Curve -->
-                    <path d="M 0,0 C 80,80 120,120 160,200 C 180,240 210,320 230,400 C 210,480 180,560 160,600 C 120,680 80,720 0,800" 
-                          stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
-
-                    <!-- Full Floral Brocade Sprigs on Left Flap -->
                     <use href="#floral-brocade" x="-10" y="20" transform="scale(1.1)"/>
                     <use href="#floral-brocade" x="20" y="280" transform="scale(1.2) rotate(-10)"/>
                     <use href="#floral-brocade" x="-15" y="520" transform="scale(1) rotate(15)"/>
                 </svg>
             </div>
 
-            <!-- RIGHT SCALLOPED FLAP WITH FULL FLORAL EMBOSSING -->
+            <!-- RIGHT FLAP -->
             <div class="flap-svg flap-right-container">
                 <svg width="100%" height="100%" viewBox="0 0 400 800" preserveAspectRatio="none">
                     <defs>
@@ -259,26 +339,16 @@
                         </filter>
                     </defs>
 
-                    <!-- Laser Cut Scalloped Curved Flap Path -->
-                    <path d="M 400,0 
-                             C 320,80 280,120 240,200 
-                             C 220,240 190,320 170,400 
-                             C 190,480 220,560 240,600 
-                             C 280,680 320,720 400,800 Z" 
-                          fill="url(#rightGradBurgundy)" filter="url(#shadowRight)"/>
+                    <path d="M 400,0 C 320,80 280,120 240,200 C 220,240 190,320 170,400 C 190,480 220,560 240,600 C 280,680 320,720 400,800 Z" fill="url(#rightGradBurgundy)" filter="url(#shadowRight)"/>
+                    <path d="M 400,0 C 320,80 280,120 240,200 C 220,240 190,320 170,400 C 190,480 220,560 240,600 C 280,680 320,720 400,800" stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
 
-                    <!-- Laser-Cut Eyelet Hole Border along Scallop Curve -->
-                    <path d="M 400,0 C 320,80 280,120 240,200 C 220,240 190,320 170,400 C 190,480 220,560 240,600 C 280,680 320,720 400,800" 
-                          stroke="#210307" stroke-width="6" stroke-dasharray="3 6" fill="none" opacity="0.6"/>
-
-                    <!-- Full Floral Brocade Sprigs on Right Flap -->
                     <use href="#floral-brocade" x="180" y="40" transform="scale(-1.1, 1.1) translate(-350, 0)"/>
                     <use href="#floral-brocade" x="150" y="300" transform="scale(-1.2, 1.2) translate(-320, 0) rotate(10)"/>
                     <use href="#floral-brocade" x="170" y="540" transform="scale(-1, 1) translate(-350, 0) rotate(-15)"/>
                 </svg>
             </div>
 
-            <!-- CREAM WAX SEAL WITH "SM" MONOGRAM -->
+            <!-- CREAM WAX SEAL -->
             <div class="wax-seal" onclick="openEnvelope()">
                 <div class="wax-seal-inner">
                     <span class="monogram-sm">SM</span>
@@ -286,10 +356,24 @@
             </div>
         </div>
 
-        <!-- REVEALED CARD -->
+        <!-- REVEALED CARD WITH HEAVENLY ANIMATION -->
         <div class="card-content">
-            <h2>STEP 1 COMPLETE</h2>
-            <p style="margin-top: 10px; font-size: 13px; color: #4a0d18; font-family: sans-serif;">Ready for Step 2!</p>
+            <div class="god-rays"></div>
+            <canvas id="heavenCanvas"></canvas>
+
+            <div class="text-backdrop">
+                <div class="sub-header">Together With Their Families</div>
+                
+                <div class="couple-names">
+                    Maham
+                    <span class="ampersand">&</span>
+                    Shiraz
+                </div>
+
+                <div class="date-location">
+                    SAVE THE DATE
+                </div>
+            </div>
         </div>
 
     </div>
@@ -297,6 +381,65 @@
     <script>
         function openEnvelope() {
             document.getElementById('envelope').classList.add('open');
+            startHeavenlyParticles();
+        }
+
+        /* Particle Engine for Heavenly Sparkles & Floating Dust */
+        function startHeavenlyParticles() {
+            const canvas = document.getElementById('heavenCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            resize();
+
+            const particles = [];
+            const particleCount = 45;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 0.8,
+                    color: Math.random() > 0.4 ? 'rgba(245, 215, 127, ' : 'rgba(255, 255, 255, ',
+                    alpha: Math.random(),
+                    speedY: -0.2 - Math.random() * 0.4,
+                    speedX: (Math.random() - 0.5) * 0.2,
+                    pulse: Math.random() * 0.02 + 0.005
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.alpha += p.pulse;
+
+                    if (p.alpha > 0.8 || p.alpha < 0.2) {
+                        p.pulse = -p.pulse;
+                    }
+
+                    if (p.y < -10) {
+                        p.y = canvas.height + 10;
+                        p.x = Math.random() * canvas.width;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + p.alpha + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'rgba(234, 194, 117, 0.8)';
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         }
     </script>
 </body>
