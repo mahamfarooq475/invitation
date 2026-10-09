@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olive Green Butterfly Envelope</title>
+    <title>Burgundy Damask Swan Envelope</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
 
         body {
-            background-color: #0f120e;
+            background-color: #0c0809;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,7 +29,7 @@
             position: relative;
             background-color: #f7f3ed;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             border-radius: 14px;
         }
 
@@ -40,7 +40,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #4b5242;
+            background-color: #4a0e17;
             z-index: 10;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
@@ -51,120 +51,99 @@
             pointer-events: none;
         }
 
-        /* REALISTIC PAPER GRAIN OVERLAY */
-        .paper-texture {
+        /* PAPER TEXTURE & EMBOSSED DAMASK PATTERN */
+        .damask-pattern {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5;
-            opacity: 0.35;
-            background-image: radial-gradient(#000 0.75px, transparent 0.75px), radial-gradient(#fff 0.75px, #4b5242 0.75px);
-            background-size: 3px 3px;
-            background-position: 0 0, 1.5px 1.5px;
-            mix-blend-mode: overlay;
-        }
-
-        /* EMBOSSED LEAF PATTERNS */
-        .leaf-emboss-left, .leaf-emboss-right {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            pointer-events: none;
             z-index: 3;
-            opacity: 0.18;
+            opacity: 0.15;
+            background-image: radial-gradient(#fff 0.75px, transparent 0.75px), radial-gradient(#000 0.75px, transparent 0.75px);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
             mix-blend-mode: overlay;
         }
 
-        .leaf-emboss-left { left: 0; }
-        .leaf-emboss-right { right: 0; transform: scaleX(-1); }
-
-        /* LEFT & RIGHT TRIANGULAR FLAPS */
-        .flap-left {
+        /* SCALLOPED FLAPS OVERLAY */
+        .flap-top, .flap-bottom {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-top: 400px solid transparent;
-            border-bottom: 400px solid transparent;
-            border-left: 208px solid #42493a;
-            filter: drop-shadow(6px 0px 12px rgba(0, 0, 0, 0.45));
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: left;
+            width: 100%;
+            height: 50%;
+            background-color: #420b13;
+            pointer-events: none;
             z-index: 2;
-        }
-
-        .flap-right {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 0;
-            height: 0;
-            border-top: 400px solid transparent;
-            border-bottom: 400px solid transparent;
-            border-right: 208px solid #4a5141;
-            filter: drop-shadow(-6px 0px 12px rgba(0, 0, 0, 0.45));
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: right;
-            z-index: 2;
         }
 
-        .envelope-container.open .flap-left {
-            transform: rotateY(-110deg);
+        .flap-top {
+            top: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.6));
+            background: linear-gradient(180deg, #57121c 0%, #3d0a11 100%);
         }
 
-        .envelope-container.open .flap-right {
-            transform: rotateY(110deg);
+        .flap-bottom {
+            bottom: 0;
+            clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+            filter: drop-shadow(0px -6px 10px rgba(0, 0, 0, 0.6));
+            background: linear-gradient(0deg, #57121c 0%, #3d0a11 100%);
         }
 
-        /* REALISTIC METALLIC BUTTERFLY WAX SEAL */
+        .envelope-container.open .flap-top {
+            transform: translateY(-100%);
+        }
+
+        .envelope-container.open .flap-bottom {
+            transform: translateY(100%);
+        }
+
+        /* CREAM SWAN WAX SEAL */
         .wax-seal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 92px;
-            height: 92px;
-            background: radial-gradient(circle at 30% 30%, #f3d683 0%, #c99c32 45%, #7a5813 85%, #473205 100%);
-            border-radius: 50%;
+            width: 95px;
+            height: 95px;
+            background: radial-gradient(circle at 35% 35%, #fffef8 0%, #f3eee3 50%, #dfd5c2 85%, #b8ab94 100%);
+            border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%; /* Organic wax edge shape */
             box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.5),
-                inset 0 3px 6px rgba(255, 255, 255, 0.6),
-                inset 0 -4px 8px rgba(0, 0, 0, 0.6);
+                0 10px 22px rgba(0, 0, 0, 0.6),
+                inset 0 3px 5px rgba(255, 255, 255, 0.9),
+                inset 0 -4px 6px rgba(120, 100, 80, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             z-index: 20;
-            border: 1px solid #dcb04d;
+            border: 1px solid #e8e2d5;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .wax-seal:hover {
             transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
         }
 
         .wax-seal-inner {
-            width: 76px;
-            height: 76px;
+            width: 74px;
+            height: 74px;
             border-radius: 50%;
-            border: 1.5px dashed rgba(255, 240, 190, 0.45);
+            border: 1px solid rgba(160, 140, 120, 0.25);
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
-        .seal-icon {
-            width: 52px;
-            height: 52px;
-            fill: #422f07;
-            filter: drop-shadow(1px 1px 0px rgba(255, 235, 170, 0.4));
+        .seal-swan {
+            width: 48px;
+            height: 48px;
+            fill: #7d6e5a;
+            filter: drop-shadow(1px 1px 0px rgba(255, 255, 255, 0.8));
         }
 
         /* CARD CONTENT BELOW */
@@ -180,7 +159,7 @@
             align-items: center;
             padding: 30px;
             text-align: center;
-            color: #3b4035;
+            color: #4a0e17;
         }
 
         .card-content h2 {
@@ -195,37 +174,23 @@
     <div class="viewport">
         <!-- CARD CONTENT HIDDEN BEHIND ENVELOPE -->
         <div class="card-content">
-            <h2>STEP 1 COMPLETE</h2>
-            <p style="margin-top: 10px; font-size: 14px; color: #7a8270;">Ready for Step 2!</p>
+            <h2>BURGUNDY SWAN CARD</h2>
+            <p style="margin-top: 10px; font-size: 14px; color: #7a323c;">Ready for Step 2!</p>
         </div>
 
-        <!-- TEXTURED OLIVE ENVELOPE -->
+        <!-- BURGUNDY ENVELOPE -->
         <div class="envelope-container" id="envelope">
-            <div class="paper-texture"></div>
+            <div class="damask-pattern"></div>
 
-            <!-- EMBOSSED BOTANICAL BRANCHES -->
-            <svg class="leaf-emboss-left" viewBox="0 0 100 200">
-                <path d="M 10,10 Q 30,50 15,100 T 20,190" stroke="#ffffff" stroke-width="2" fill="none"/>
-                <path d="M 15,40 Q 35,30 40,45 Q 25,50 15,40 Z" fill="#ffffff"/>
-                <path d="M 17,70 Q 40,65 42,80 Q 25,85 17,70 Z" fill="#ffffff"/>
-                <path d="M 18,110 Q 38,100 45,120 Q 28,122 18,110 Z" fill="#ffffff"/>
-            </svg>
-            <svg class="leaf-emboss-right" viewBox="0 0 100 200">
-                <path d="M 10,10 Q 30,50 15,100 T 20,190" stroke="#ffffff" stroke-width="2" fill="none"/>
-                <path d="M 15,40 Q 35,30 40,45 Q 25,50 15,40 Z" fill="#ffffff"/>
-                <path d="M 17,70 Q 40,65 42,80 Q 25,85 17,70 Z" fill="#ffffff"/>
-                <path d="M 18,110 Q 38,100 45,120 Q 28,122 18,110 Z" fill="#ffffff"/>
-            </svg>
+            <div class="flap-top"></div>
+            <div class="flap-bottom"></div>
 
-            <div class="flap-left"></div>
-            <div class="flap-right"></div>
-
-            <!-- WAX SEAL -->
+            <!-- CREAM SWAN WAX SEAL -->
             <div class="wax-seal" onclick="openEnvelope()">
                 <div class="wax-seal-inner">
-                    <svg class="seal-icon" viewBox="0 0 24 24">
-                        <path d="M6 15C5 12 6 8 8 6M18 15C19 12 18 8 16 6" stroke="#422f07" stroke-width="1.2" fill="none"/>
-                        <path d="M12 9 C11 7, 7 5, 6 9 C5 12, 9 14, 12 11 M12 9 C13 7, 17 5, 18 9 C19 12, 15 14, 12 11 M12 11 C10 13, 8 17, 11 18 C13 18, 12 14, 12 11 M12 11 C14 13, 16 17, 13 18 C11 18, 12 14, 12 11 M12 7 V15"/>
+                    <svg class="seal-swan" viewBox="0 0 24 24">
+                        <!-- Swan Motif -->
+                        <path d="M18.5 12c-.83 0-1.5.67-1.5 1.5 0 .63.39 1.17.95 1.38-.28.87-1.1 1.62-2.45 1.62-1.34 0-2.5-.89-2.5-2.5 0-2.8 3.5-3.8 3.5-7 0-2.21-1.79-4-4-4-1.8 0-3.32 1.19-3.82 2.83C8.16 5.3 7.15 5 6 5c-2.21 0-4 1.79-4 4 0 2.8 3.5 3.8 3.5 7 0 2.76 2.24 5 5 5 2.88 0 4.88-1.75 5.58-3.23.68.15 1.28.23 1.92.23 2.76 0 5-2.24 5-5 0-.83-.67-1.5-1.5-1.5z"/>
                     </svg>
                 </div>
             </div>
