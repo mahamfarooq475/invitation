@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Wedding Invitation | Maham & Shiraz</title>
+  <title>Maham & Shiraz | Wedding Invitation</title>
   
-  <!-- Google Fonts & FontAwesome -->
+  <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
-      --blush-pink: #f7dcdb;
-      --soft-pink: #fbeee8;
-      --deep-rose: #d18288;
+      --bg-rose: #f7e6e3;
+      --envelope-pink: #f0c5c1;
+      --envelope-dark: #e2b0ac;
+      --envelope-border: #d49a95;
       --burgundy: #4a1525;
       --gold-primary: #d4af37;
-      --gold-light: #f7e7a1;
-      --gold-dark: #aa820a;
-      --card-bg: #fffcf9;
-      --text-main: #3d2b2e;
-      --shadow: 0 15px 35px rgba(74, 21, 37, 0.15);
+      --gold-light: #fbeea7;
+      --gold-dark: #997a15;
+      --rose-gold: #c98a8e;
+      --shadow: 0 20px 40px rgba(74, 21, 37, 0.25);
     }
 
     * {
@@ -34,137 +34,157 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #f3e3df;
-      color: var(--text-main);
+      background: #e2cdc8;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(247, 230, 227, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(201, 138, 142, 0.3) 0px, transparent 50%);
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* Ambient Floating Rose Petals Canvas */
+    /* Floating Petals Canvas Overlay */
     #petals-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       pointer-events: none;
       z-index: 100;
     }
 
-    /* Outer Mobile App Container */
-    .app-container {
+    /* Mobile Device Outer Wrapper */
+    .app-screen {
       width: 100%;
-      max-width: 430px;
+      max-width: 420px;
       height: 100vh;
-      max-height: 900px;
-      background: #fdf6f0;
+      max-height: 880px;
+      background: #faf2ee;
       position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    @media (min-height: 901px) {
-      .app-container {
-        border-radius: 30px;
+    @media (min-height: 881px) {
+      .app-screen {
+        border-radius: 36px;
         height: 92vh;
+        border: 8px solid #ffffff;
       }
     }
 
     /* Audio Toggle Button */
     .audio-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 18px;
+      right: 18px;
       z-index: 90;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--gold-primary);
       color: var(--burgundy);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
     }
 
-    /* ENVELOPE OVERLAY SYSTEM */
-    .envelope-overlay {
+    /* =========================================================
+       3D ENVELOPE STYLING & ANIMATIONS
+       ========================================================= */
+    .envelope-stage {
       position: absolute;
       inset: 0;
       z-index: 80;
-      background: linear-gradient(135deg, #fceae6 0%, #f3d1ca 100%);
+      background: linear-gradient(135deg, #fceae6 0%, #e2b0ac 100%);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
+      perspective: 1200px;
+      transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
     }
 
-    .envelope-overlay.opened {
+    .envelope-stage.opened {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
 
-    .envelope-wrapper {
+    .envelope-3d {
       width: 88%;
-      height: 480px;
+      height: 520px;
       position: relative;
-      perspective: 1200px;
-    }
-
-    .envelope-body {
-      width: 100%;
-      height: 100%;
-      background: #f4cfc6;
+      transform-style: preserve-3d;
+      box-shadow: var(--shadow);
       border-radius: 12px;
-      position: relative;
-      box-shadow: 0 20px 40px rgba(74, 21, 37, 0.2);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      overflow: hidden;
     }
 
-    /* Damask Pattern Overlay */
-    .envelope-body::before {
-      content: '';
+    /* Envelope Background & Pattern */
+    .env-back {
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(var(--deep-rose) 0.7px, transparent 0.7px);
-      background-size: 16px 16px;
-      opacity: 0.15;
+      background: #e8b8b4;
+      border-radius: 12px;
+      background-image: radial-gradient(var(--burgundy) 0.6px, transparent 0.6px);
+      background-size: 14px 14px;
+      opacity: 0.9;
     }
 
-    .envelope-flaps {
+    /* Inside Floral Lining */
+    .env-lining {
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      background: #fff0ec;
+      border-radius: 8px;
+      background-image: 
+        radial-gradient(circle at 50% 30%, #f7d4d0 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(209,130,138,0.05) 0, rgba(209,130,138,0.05) 10px, transparent 10px, transparent 20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 40px;
+    }
+
+    .lining-text {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.2rem;
+      color: var(--burgundy);
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+      text-align: center;
+    }
+
+    /* 3D Envelope Flaps */
+    .env-flap {
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
 
+    /* Top Flap with 3D Flip */
     .flap-top {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 50%;
-      background: #eec1b7;
+      height: 55%;
+      background: linear-gradient(180deg, #f2c9c5 0%, #e5b3af 100%);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top;
-      transition: transform 0.8s ease-in-out;
-      z-index: 3;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 5;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     }
 
-    .envelope-overlay.opening .flap-top {
+    .envelope-stage.opening .flap-top {
       transform: rotateX(180deg);
       z-index: 1;
     }
@@ -175,79 +195,66 @@
       left: 0;
       width: 100%;
       height: 55%;
-      background: #f1c9c0;
+      background: linear-gradient(0deg, #e8b8b4 0%, #dfa8a4 100%);
       clip-path: polygon(0 100%, 100% 100%, 50% 0);
-      z-index: 2;
+      z-index: 4;
     }
 
     .flap-left {
       position: absolute;
       top: 0;
       left: 0;
-      width: 50%;
+      width: 55%;
       height: 100%;
-      background: #ebbdb1;
+      background: #e2b0ac;
       clip-path: polygon(0 0, 100% 50%, 0 100%);
-      z-index: 2;
+      z-index: 3;
     }
 
     .flap-right {
       position: absolute;
       top: 0;
       right: 0;
-      width: 50%;
+      width: 55%;
       height: 100%;
-      background: #ebbdb1;
+      background: #dea4a0;
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
-      z-index: 2;
+      z-index: 3;
     }
 
-    .envelope-text {
-      position: absolute;
-      bottom: 18%;
-      width: 100%;
-      text-align: center;
-      font-family: 'Alex Brush', cursive;
-      font-size: 2rem;
-      color: var(--burgundy);
-      z-index: 4;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
-      padding: 0 20px;
-    }
-
-    .wax-seal {
+    /* Photorealistic Wax Seal Stamp */
+    .wax-seal-btn {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 75px;
-      height: 75px;
-      background: radial-gradient(circle at 30% 30%, #f7e7a1, #d4af37 60%, #aa820a);
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 35% 35%, #ffeaa5 0%, #d4af37 50%, #8c6e10 100%);
       border-radius: 50%;
       z-index: 10;
+      cursor: pointer;
+      box-shadow: 
+        0 10px 25px rgba(0,0,0,0.35),
+        inset 0 2px 4px rgba(255,255,255,0.8),
+        inset 0 -3px 6px rgba(0,0,0,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.6);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: pulseGlow 2s infinite alternate;
+      animation: sealPulse 2.2s infinite alternate;
     }
 
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5), 0 8px 20px rgba(0,0,0,0.2); }
-      100% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0), 0 12px 25px rgba(0,0,0,0.3); }
+    @keyframes sealPulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1.06); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255,255,255,0.8); }
     }
 
-    .wax-seal:hover {
-      transform: translate(-50%, -50%) scale(1.08);
-    }
-
-    .wax-seal-inner {
-      width: 60px;
-      height: 60px;
+    .seal-inner {
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      border: 2px dashed rgba(74, 21, 37, 0.4);
+      border: 2px dashed rgba(74, 21, 37, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -255,21 +262,17 @@
       color: var(--burgundy);
       font-family: 'Cinzel', serif;
       font-weight: 700;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
     }
 
-    .wax-seal-inner i {
-      font-size: 1.1rem;
-      margin-bottom: 2px;
-    }
-
-    .ribbon-overlay {
+    /* Satin Ribbon Bow Reveal Overlay */
+    .bow-reveal-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(253, 246, 240, 0.95);
-      z-index: 70;
+      background: rgba(250, 242, 238, 0.96);
+      z-index: 75;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -279,71 +282,69 @@
       transition: opacity 0.8s ease;
     }
 
-    .ribbon-overlay.active {
+    .bow-reveal-overlay.active {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .bow-container {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .bow-svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 10px 15px rgba(209, 130, 136, 0.4));
-      animation: floatBow 3s ease-in-out infinite alternate;
+      width: 150px;
+      height: 150px;
+      filter: drop-shadow(0 12px 20px rgba(201, 138, 142, 0.4));
+      animation: bowFloat 3s ease-in-out infinite alternate;
     }
 
-    @keyframes floatBow {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-8px) scale(1.03); }
+    @keyframes bowFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
 
-    /* MAIN SCROLLABLE INVITATION */
-    .scroll-view {
+    /* =========================================================
+       MAIN SCROLLABLE ROYAL FLORAL INVITATION
+       ========================================================= */
+    .main-scroll-card {
       flex: 1;
       overflow-y: auto;
       scroll-behavior: smooth;
       position: relative;
       z-index: 10;
-      padding-bottom: 40px;
+      padding-bottom: 50px;
+      background: linear-gradient(180deg, #fffcfb 0%, #fdf5f3 100%);
     }
 
-    .scroll-view::-webkit-scrollbar {
+    .main-scroll-card::-webkit-scrollbar {
       width: 4px;
     }
-    .scroll-view::-webkit-scrollbar-thumb {
-      background: var(--deep-rose);
+    .main-scroll-card::-webkit-scrollbar-thumb {
+      background: var(--rose-gold);
       border-radius: 4px;
     }
 
-    .hero-section {
+    /* Hero Arch Backdrop Section */
+    .hero-banner {
       position: relative;
       padding: 40px 20px 30px;
       text-align: center;
-      background: linear-gradient(180deg, #fff0ed 0%, #fdf6f0 100%);
-      overflow: hidden;
+      background: 
+        radial-gradient(circle at 50% 20%, rgba(247, 218, 215, 0.6) 0%, transparent 70%),
+        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(212, 175, 55, 0.05) 20px);
     }
 
-    .floral-arch-frame {
+    .floral-arch {
       border: 2px solid var(--gold-primary);
-      border-radius: 180px 180px 15px 15px;
-      padding: 40px 20px 30px;
-      background: rgba(255, 252, 249, 0.9);
-      box-shadow: inset 0 0 20px rgba(247, 220, 219, 0.5), 0 10px 30px rgba(74, 21, 37, 0.05);
+      border-radius: 200px 200px 18px 18px;
+      padding: 45px 20px 35px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 
+        inset 0 0 25px rgba(247, 226, 223, 0.6),
+        0 12px 35px rgba(74, 21, 37, 0.08);
       position: relative;
     }
 
-    .monogram-badge {
-      width: 65px;
-      height: 65px;
-      margin: 0 auto 15px;
+    .monogram-seal {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
       border: 1px solid var(--gold-primary);
       border-radius: 50%;
       display: flex;
@@ -351,225 +352,230 @@
       justify-content: center;
       background: #fff;
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--burgundy);
-      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
     }
 
-    .host-text {
+    .host-intro {
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
+      font-size: 0.78rem;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #7a525d;
+      color: #8c5d67;
       margin-bottom: 8px;
     }
 
     .host-names {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--burgundy);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       line-height: 1.4;
     }
 
-    .couple-title {
-      margin: 25px 0 15px;
+    .couple-title-box {
+      margin: 25px 0 20px;
     }
 
     .bride-name, .groom-name {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 700;
       color: var(--burgundy);
       letter-spacing: 0.5px;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
-    .ampersand {
+    .ampersand-title {
       font-family: 'Alex Brush', cursive;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: var(--gold-dark);
-      margin: 5px 0;
+      margin: 4px 0;
     }
 
-    .divider {
+    .card-divider {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 15px;
       margin: 25px 0;
     }
+
     .divider-line {
       height: 1px;
-      width: 60px;
+      width: 65px;
       background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
     }
+
     .divider-icon {
       color: var(--gold-primary);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
+    /* Event Details & Calendar Section */
     .details-card {
-      background: #fff;
+      background: #ffffff;
       margin: 0 20px 25px;
-      border-radius: 20px;
-      padding: 25px 20px;
+      border-radius: 22px;
+      padding: 28px 22px;
       border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: var(--shadow);
+      box-shadow: 0 15px 35px rgba(74, 21, 37, 0.08);
       text-align: center;
     }
 
-    .section-heading {
+    .section-title {
       font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--burgundy);
       letter-spacing: 2px;
       margin-bottom: 20px;
       text-transform: uppercase;
     }
 
-    .calendar-widget {
-      background: #fdf8f5;
-      border: 1px solid var(--blush-pink);
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 20px;
+    /* Interactive Calendar Widget */
+    .calendar-container {
+      background: #fdf8f6;
+      border: 1px solid var(--bg-rose);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 22px;
     }
 
     .calendar-header {
       font-family: 'Cinzel', serif;
       font-weight: 700;
       color: var(--burgundy);
-      margin-bottom: 10px;
-      font-size: 0.95rem;
+      margin-bottom: 12px;
+      font-size: 1rem;
     }
 
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-      font-size: 0.75rem;
+      gap: 6px;
+      font-size: 0.78rem;
       text-align: center;
     }
 
-    .day-name {
+    .day-header {
       font-weight: 600;
-      color: var(--deep-rose);
-      padding-bottom: 5px;
+      color: var(--rose-gold);
+      padding-bottom: 6px;
     }
 
-    .day-number {
-      padding: 6px 0;
+    .day-num {
+      padding: 7px 0;
       color: #666;
       border-radius: 50%;
     }
 
-    .day-number.highlight {
+    .day-num.wedding-day {
       background: var(--burgundy);
       color: #fff;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(74, 21, 37, 0.3);
+      box-shadow: 0 3px 10px rgba(74, 21, 37, 0.35);
     }
 
-    .info-row {
+    .event-info-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      margin: 12px 0;
+      margin: 14px 0;
       font-size: 0.95rem;
-      color: var(--text-main);
+      color: #444;
     }
 
-    .info-row i {
+    .event-info-row i {
       color: var(--gold-dark);
-      font-size: 1.1rem;
-      width: 20px;
+      font-size: 1.15rem;
     }
 
-    .timer-container {
+    /* Countdown Timer Display */
+    .timer-wrap {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin: 20px 0 10px;
+      margin: 22px 0 12px;
     }
 
     .timer-box {
-      background: linear-gradient(145deg, #fff0ed, #fbeee8);
-      border: 1px solid var(--blush-pink);
+      background: linear-gradient(145deg, #fff2f0, #fceae6);
+      border: 1px solid var(--bg-rose);
       border-radius: 12px;
-      width: 65px;
-      padding: 8px 0;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+      width: 68px;
+      padding: 10px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.03);
     }
 
-    .timer-val {
+    .timer-num {
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--burgundy);
     }
 
-    .timer-label {
+    .timer-sub {
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: #888;
     }
 
-    .venue-box {
+    /* Venue Card & Map Button */
+    .venue-card {
       background: #faf2ee;
-      border-radius: 15px;
+      border-radius: 16px;
       padding: 20px;
-      margin-top: 15px;
+      margin-top: 18px;
       border-left: 4px solid var(--gold-primary);
       text-align: left;
     }
 
-    .venue-title {
+    .venue-name {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--burgundy);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
-    .venue-address {
+    .venue-addr {
       font-size: 0.85rem;
       color: #666;
       line-height: 1.5;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .map-btn {
+    .directions-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 10px 18px;
       background: var(--burgundy);
       color: #fff;
       text-decoration: none;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      border-radius: 22px;
+      font-size: 0.82rem;
       font-weight: 500;
+      transition: background 0.3s;
     }
 
+    /* RSVP Section Card */
     .rsvp-card {
-      background: #fff;
+      background: #ffffff;
       margin: 0 20px 25px;
-      border-radius: 20px;
-      padding: 25px 20px;
+      border-radius: 22px;
+      padding: 28px 22px;
       border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: var(--shadow);
-      text-align: center;
+      box-shadow: 0 15px 35px rgba(74, 21, 37, 0.08);
     }
 
     .form-group {
-      margin-bottom: 15px;
-      text-align: left;
+      margin-bottom: 16px;
     }
 
     .form-group label {
@@ -577,186 +583,190 @@
       font-size: 0.8rem;
       font-weight: 600;
       color: var(--burgundy);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .form-control {
+    .form-input {
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px 16px;
       border: 1px solid #e0d0cc;
-      border-radius: 10px;
+      border-radius: 12px;
       font-family: inherit;
       font-size: 0.9rem;
       background: #fffcfb;
     }
 
-    .attendance-selector {
+    .attendance-grid {
       display: flex;
       gap: 10px;
-      margin-top: 5px;
+      margin-top: 6px;
     }
 
-    .radio-tile {
+    .radio-option {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #e0d0cc;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
       cursor: pointer;
       font-size: 0.85rem;
       background: #fff;
+      transition: all 0.3s ease;
     }
 
-    .radio-tile.selected {
-      background: var(--blush-pink);
+    .radio-option.selected {
+      background: var(--bg-rose);
       border-color: var(--burgundy);
       color: var(--burgundy);
       font-weight: 600;
     }
 
-    .submit-btn {
+    .submit-rsvp-btn {
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
       color: #fff;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 0.95rem;
+      letter-spacing: 1px;
       cursor: pointer;
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
       margin-top: 10px;
     }
 
+    /* Guest Blessings / Wish Wall */
     .wishes-card {
-      background: #fff;
+      background: #ffffff;
       margin: 0 20px 30px;
-      border-radius: 20px;
-      padding: 25px 20px;
+      border-radius: 22px;
+      padding: 28px 22px;
       border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: var(--shadow);
+      box-shadow: 0 15px 35px rgba(74, 21, 37, 0.08);
     }
 
-    .wish-list {
+    .wish-feed {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 15px;
+      margin-top: 16px;
       max-height: 220px;
       overflow-y: auto;
     }
 
-    .wish-item {
+    .wish-bubble {
       background: #fdf8f6;
-      border-left: 3px solid var(--deep-rose);
-      padding: 12px 15px;
-      border-radius: 0 10px 10px 0;
+      border-left: 3px solid var(--rose-gold);
+      padding: 12px 16px;
+      border-radius: 0 12px 12px 0;
       font-size: 0.85rem;
     }
 
-    .wish-author {
+    .wish-author-name {
       font-weight: 700;
       color: var(--burgundy);
       margin-bottom: 3px;
     }
 
-    .wish-text {
+    .wish-body-text {
       color: #555;
       font-style: italic;
     }
 
-    .toast {
+    /* Toast Alert */
+    .toast-msg {
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: var(--burgundy);
       color: #fff;
-      padding: 12px 25px;
+      padding: 12px 26px;
       border-radius: 25px;
       font-size: 0.85rem;
       z-index: 200;
-      transition: transform 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       white-space: nowrap;
     }
 
-    .toast.show {
+    .toast-msg.show {
       transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Petals Background Canvas -->
+  <!-- Floating Falling Petals -->
   <canvas id="petals-canvas"></canvas>
 
-  <div class="app-container">
+  <div class="app-screen">
     
-    <!-- Audio Button -->
-    <button class="audio-btn" id="audioToggle" title="Toggle Sound">
+    <!-- Audio Background Control Button -->
+    <button class="audio-btn" id="audioToggleBtn" title="Play Sound">
       <i class="fa-solid fa-music"></i>
     </button>
 
-    <!-- Interactive Envelope Overlay -->
-    <div class="envelope-overlay" id="envelopeOverlay">
-      <div class="envelope-wrapper">
-        <div class="envelope-body">
-          <div class="envelope-flaps">
-            <div class="flap-top"></div>
-            <div class="flap-left"></div>
-            <div class="flap-right"></div>
-            <div class="flap-bottom"></div>
-          </div>
-          
-          <div class="envelope-text">
-            Requests the pleasure<br>of your company
-          </div>
+    <!-- 3D Interactive Envelope Stage -->
+    <div class="envelope-stage" id="envelopeStage">
+      <div class="envelope-3d">
+        <div class="env-back"></div>
+        
+        <div class="env-lining">
+          <div class="lining-text">Requests the pleasure<br>of your company</div>
+        </div>
 
-          <!-- Wax Seal Button -->
-          <div class="wax-seal" id="waxSealBtn">
-            <div class="wax-seal-inner">
-              <i class="fa-solid fa-crown"></i>
-              <span>Open</span>
-            </div>
+        <div class="env-flap">
+          <div class="flap-top"></div>
+          <div class="flap-left"></div>
+          <div class="flap-right"></div>
+          <div class="flap-bottom"></div>
+        </div>
+
+        <!-- Gold Wax Seal -->
+        <div class="wax-seal-btn" id="waxSealBtn">
+          <div class="seal-inner">
+            <i class="fa-solid fa-crown" style="font-size:1.1rem; margin-bottom:2px;"></i>
+            <span>OPEN</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Ribbon Bow Reveal -->
-    <div class="ribbon-overlay" id="ribbonOverlay">
-      <div class="bow-container">
-        <svg class="bow-svg" viewBox="0 0 100 100" fill="none">
-          <path d="M50 45 C30 20 10 35 35 50 C10 65 30 80 50 55 C70 80 90 65 65 50 C90 35 70 20 50 45 Z" fill="#d18288" />
-          <circle cx="50" cy="50" r="7" fill="#d4af37" />
-          <path d="M45 54 L30 85 M55 54 L70 85" stroke="#d18288" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-      </div>
+    <!-- Intermediate Satin Ribbon Bow Reveal Overlay -->
+    <div class="bow-reveal-overlay" id="bowRevealOverlay">
+      <svg class="bow-svg" viewBox="0 0 100 100" fill="none">
+        <path d="M50 45 C30 20 10 35 35 50 C10 65 30 80 50 55 C70 80 90 65 65 50 C90 35 70 20 50 45 Z" fill="#c98a8e" />
+        <circle cx="50" cy="50" r="7" fill="#d4af37" />
+        <path d="M45 54 L30 85 M55 54 L70 85" stroke="#c98a8e" stroke-width="6" stroke-linecap="round"/>
+      </svg>
     </div>
 
-    <!-- Scrollable Card Area -->
-    <div class="scroll-view" id="mainCardView">
+    <!-- Main Scrollable Floral Wedding Invitation -->
+    <div class="main-scroll-card">
       
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="floral-arch-frame">
-          <div class="monogram-badge">M & S</div>
+      <!-- Hero Banner Section -->
+      <section class="hero-banner">
+        <div class="floral-arch">
+          <div class="monogram-seal">M & S</div>
           
-          <div class="host-text">With great joy and gratitude</div>
+          <div class="host-intro">With immense joy & blessings</div>
           <div class="host-names">
             Mr. Farooq Hussain<br>& Tabassum Farooq
           </div>
           
-          <div class="host-text">Invite you to the wedding ceremony of their beloved daughter</div>
+          <div class="host-intro">Invite you to celebrate the wedding ceremony of their beloved daughter</div>
           
-          <div class="couple-title">
+          <div class="couple-title-box">
             <div class="bride-name">Maham Farooq</div>
-            <div class="ampersand">with</div>
+            <div class="ampersand-title">with</div>
             <div class="groom-name">Shiraz Hussain</div>
           </div>
 
-          <div class="divider">
+          <div class="card-divider">
             <div class="divider-line"></div>
             <i class="fa-solid fa-heart divider-icon"></i>
             <div class="divider-line"></div>
@@ -768,118 +778,120 @@
         </div>
       </section>
 
-      <!-- Details Section -->
+      <!-- Event Schedule & Calendar Section -->
       <section class="details-card">
-        <h2 class="section-heading">Save The Date</h2>
+        <h2 class="section-title">Save The Date</h2>
 
-        <!-- January 2027 Calendar -->
-        <div class="calendar-widget">
+        <!-- Interactive January 2027 Calendar -->
+        <div class="calendar-container">
           <div class="calendar-header">January 2027</div>
           <div class="calendar-grid">
-            <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div>
-            <div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div>
-            <div class="day-name">S</div>
+            <div class="day-header">S</div><div class="day-header">M</div><div class="day-header">T</div>
+            <div class="day-header">W</div><div class="day-header">T</div><div class="day-header">F</div>
+            <div class="day-header">S</div>
             
-            <div class="day-number"></div><div class="day-number"></div><div class="day-number"></div><div class="day-number"></div><div class="day-number"></div>
-            <div class="day-number">1</div><div class="day-number">2</div>
-            <div class="day-number">3</div><div class="day-number">4</div><div class="day-number">5</div><div class="day-number">6</div><div class="day-number">7</div><div class="day-number">8</div><div class="day-number">9</div>
-            <div class="day-number">10</div><div class="day-number">11</div><div class="day-number">12</div><div class="day-number">13</div><div class="day-number">14</div>
-            <div class="day-number highlight">15</div>
-            <div class="day-number">16</div>
-            <div class="day-number">17</div><div class="day-number">18</div><div class="day-number">19</div><div class="day-number">20</div><div class="day-number">21</div><div class="day-number">22</div><div class="day-number">23</div>
+            <div class="day-num"></div><div class="day-num"></div><div class="day-num"></div><div class="day-num"></div><div class="day-num"></div>
+            <div class="day-num">1</div><div class="day-num">2</div>
+            <div class="day-num">3</div><div class="day-num">4</div><div class="day-num">5</div><div class="day-num">6</div><div class="day-num">7</div><div class="day-num">8</div><div class="day-num">9</div>
+            <div class="day-num">10</div><div class="day-num">11</div><div class="day-num">12</div><div class="day-num">13</div><div class="day-num">14</div>
+            <div class="day-num wedding-day">15</div>
+            <div class="day-num">16</div>
+            <div class="day-num">17</div><div class="day-num">18</div><div class="day-num">19</div><div class="day-num">20</div><div class="day-num">21</div><div class="day-num">22</div><div class="day-num">23</div>
           </div>
         </div>
 
-        <div class="info-row">
+        <div class="event-info-row">
           <i class="fa-regular fa-calendar-check"></i>
           <span>Friday, 15th January 2027</span>
         </div>
 
-        <div class="info-row">
+        <div class="event-info-row">
           <i class="fa-regular fa-clock"></i>
           <span>Dinner Serving at <strong>9:00 PM</strong></span>
         </div>
 
-        <!-- Timer -->
-        <div class="timer-container">
-          <div class="timer-box"><div class="timer-val" id="days">00</div><div class="timer-label">Days</div></div>
-          <div class="timer-box"><div class="timer-val" id="hours">00</div><div class="timer-label">Hours</div></div>
-          <div class="timer-box"><div class="timer-val" id="mins">00</div><div class="timer-label">Mins</div></div>
-          <div class="timer-box"><div class="timer-val" id="secs">00</div><div class="timer-label">Secs</div></div>
+        <!-- Realtime Countdown Timer -->
+        <div class="timer-wrap">
+          <div class="timer-box"><div class="timer-num" id="dVal">00</div><div class="timer-sub">Days</div></div>
+          <div class="timer-box"><div class="timer-num" id="hVal">00</div><div class="timer-sub">Hours</div></div>
+          <div class="timer-box"><div class="timer-num" id="mVal">00</div><div class="timer-sub">Mins</div></div>
+          <div class="timer-box"><div class="timer-num" id="sVal">00</div><div class="timer-sub">Secs</div></div>
         </div>
 
-        <!-- Venue Location -->
-        <div class="venue-box">
-          <div class="venue-title">La Glamor Banquet</div>
-          <div class="venue-address">
+        <!-- Venue Location Card -->
+        <div class="venue-card">
+          <div class="venue-name">La Glamor Banquet</div>
+          <div class="venue-addr">
             Address: D, 8 Karachi, near Sakhi Hassan, D-8 Block J North Nazimabad Town, Karachi, Sindh, Pakistan
           </div>
-          <a href="https://maps.google.com/?q=La+Glamor+Banquet+North+Nazimabad+Karachi" target="_blank" class="map-btn">
+          <a href="https://maps.google.com/?q=La+Glamor+Banquet+North+Nazimabad+Karachi" target="_blank" class="directions-btn">
             <i class="fa-solid fa-location-dot"></i> Get Directions
           </a>
         </div>
       </section>
 
-      <!-- RSVP Section -->
+      <!-- RSVP Form Card -->
       <section class="rsvp-card">
-        <h2 class="section-heading">Kindly Respond</h2>
+        <h2 class="section-title">Kindly Respond</h2>
         <form id="rsvpForm">
           <div class="form-group">
-            <label>Your Full Name</label>
-            <input type="text" id="guestName" class="form-control" placeholder="Enter your name" required />
+            <label>Full Name</label>
+            <input type="text" id="guestNameInput" class="form-input" placeholder="Enter your full name" required />
           </div>
 
           <div class="form-group">
-            <label>Will you attend?</label>
-            <div class="attendance-selector">
-              <div class="radio-tile selected" onclick="selectAttending(this, 'Yes')">Joyfully Accept</div>
-              <div class="radio-tile" onclick="selectAttending(this, 'No')">Regretfully Decline</div>
+            <label>Attendance</label>
+            <div class="attendance-grid">
+              <div class="radio-option selected" onclick="pickAttendance(this, 'Yes')">Joyfully Accept</div>
+              <div class="radio-option" onclick="pickAttendance(this, 'No')">Regretfully Decline</div>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Warm Wishes / Message</label>
-            <textarea id="guestWish" class="form-control" rows="3" placeholder="Leave a message..."></textarea>
+            <label>Blessings / Message</label>
+            <textarea id="guestWishInput" class="form-input" rows="3" placeholder="Leave a wish for Maham & Shiraz..."></textarea>
           </div>
 
-          <button type="submit" class="submit-btn">Send Confirmation</button>
+          <button type="submit" class="submit-rsvp-btn">Submit Confirmation</button>
         </form>
       </section>
 
-      <!-- Wishes Guestbook -->
+      <!-- Guest Wishes Guestbook -->
       <section class="wishes-card">
-        <h2 class="section-heading" style="margin-bottom:10px;">Guest Blessings</h2>
-        <div class="wish-list" id="wishList">
-          <div class="wish-item">
-            <div class="wish-author">Uncle Tariq & Family</div>
-            <div class="wish-text">"Wishing Maham and Shiraz a lifetime of endless love, laughter, and happiness together!"</div>
+        <h2 class="section-title" style="margin-bottom:8px;">Guest Blessings</h2>
+        <div class="wish-feed" id="wishFeed">
+          <div class="wish-bubble">
+            <div class="wish-author-name">Uncle Tariq & Family</div>
+            <div class="wish-body-text">"Wishing Maham and Shiraz a lifetime of endless love, laughter, and happiness together!"</div>
           </div>
         </div>
       </section>
 
     </div>
 
-    <div class="toast" id="toast">Response submitted! Thank you.</div>
+    <!-- Notification Toast -->
+    <div class="toast-msg" id="toastMsg">Response submitted! Thank you.</div>
 
   </div>
 
   <script>
+    /* Web Audio Sound Effects & Melodic Synthesizer */
     let audioCtx = null;
     let isPlaying = false;
-    let musicInterval = null;
+    let melodyInterval = null;
 
-    function initAudio() {
+    function initAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
     }
 
-    function playTone(freq, duration, type = 'sine', gainVal = 0.1) {
+    function triggerNote(freq, duration, gainVal = 0.08) {
       if (!audioCtx) return;
       try {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = type;
+        osc.type = 'sine';
         osc.frequency.value = freq;
         gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
@@ -890,121 +902,122 @@
       } catch (e) {}
     }
 
-    function startAmbientMusic() {
-      initAudio();
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+    function startMelody() {
+      initAudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 392.00];
       let step = 0;
       isPlaying = true;
-      document.getElementById('audioToggle').style.borderColor = '#4a1525';
+      document.getElementById('audioToggleBtn').style.borderColor = '#4a1525';
 
-      musicInterval = setInterval(() => {
+      melodyInterval = setInterval(() => {
         if (!isPlaying) return;
-        playTone(notes[step % notes.length], 1.5, 'sine', 0.05);
+        triggerNote(notes[step % notes.length], 1.4, 0.04);
         step++;
       }, 1200);
     }
 
-    function stopAmbientMusic() {
+    function stopMelody() {
       isPlaying = false;
-      if (musicInterval) clearInterval(musicInterval);
-      document.getElementById('audioToggle').style.borderColor = '#d4af37';
+      if (melodyInterval) clearInterval(melodyInterval);
+      document.getElementById('audioToggleBtn').style.borderColor = '#d4af37';
     }
 
-    document.getElementById('audioToggle').addEventListener('click', () => {
+    document.getElementById('audioToggleBtn').addEventListener('click', () => {
       if (isPlaying) {
-        stopAmbientMusic();
+        stopMelody();
       } else {
-        startAmbientMusic();
+        startMelody();
       }
     });
 
+    /* Envelope Opening Sequence */
     const waxSealBtn = document.getElementById('waxSealBtn');
-    const envelopeOverlay = document.getElementById('envelopeOverlay');
-    const ribbonOverlay = document.getElementById('ribbonOverlay');
+    const envelopeStage = document.getElementById('envelopeStage');
+    const bowRevealOverlay = document.getElementById('bowRevealOverlay');
 
     waxSealBtn.addEventListener('click', () => {
-      initAudio();
-      playTone(400, 0.1, 'triangle', 0.2);
-      setTimeout(() => playTone(600, 0.3, 'sine', 0.15), 100);
+      initAudioContext();
+      triggerNote(440, 0.1, 0.15);
 
-      envelopeOverlay.classList.add('opening');
-
-      setTimeout(() => {
-        ribbonOverlay.classList.add('active');
-        playTone(523.25, 0.8, 'sine', 0.1);
-      }, 700);
+      envelopeStage.classList.add('opening');
 
       setTimeout(() => {
-        envelopeOverlay.classList.add('opened');
-        ribbonOverlay.classList.remove('active');
-        startAmbientMusic();
-      }, 1800);
+        bowRevealOverlay.classList.add('active');
+        triggerNote(523.25, 0.6, 0.1);
+      }, 650);
+
+      setTimeout(() => {
+        envelopeStage.classList.add('opened');
+        bowRevealOverlay.classList.remove('active');
+        startMelody();
+      }, 1700);
     });
 
-    const targetDate = new Date('January 15, 2027 21:00:00').getTime();
+    /* Event Countdown Timer (January 15, 2027 @ 21:00) */
+    const targetTime = new Date('January 15, 2027 21:00:00').getTime();
 
-    function updateCountdown() {
+    function updateTimer() {
       const now = new Date().getTime();
-      const difference = targetDate - now;
+      const diff = targetTime - now;
 
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((difference % (1000 * 60)) / 1000);
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('mins').innerText = mins < 10 ? '0' + mins : mins;
-        document.getElementById('secs').innerText = secs < 10 ? '0' + secs : secs;
+        document.getElementById('dVal').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('hVal').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('mVal').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('sVal').innerText = s < 10 ? '0' + s : s;
       }
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateTimer, 1000);
+    updateTimer();
 
-    let attendingStatus = 'Yes';
+    /* RSVP Form Handling */
+    let attendanceValue = 'Yes';
 
-    function selectAttending(element, status) {
-      document.querySelectorAll('.radio-tile').forEach(tile => tile.classList.remove('selected'));
+    function pickAttendance(element, status) {
+      document.querySelectorAll('.radio-option').forEach(el => el.classList.remove('selected'));
       element.classList.add('selected');
-      attendingStatus = status;
-      playTone(500, 0.1, 'sine', 0.05);
+      attendanceValue = status;
+      triggerNote(500, 0.08, 0.05);
     }
 
     document.getElementById('rsvpForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('guestName').value.trim();
-      const wish = document.getElementById('guestWish').value.trim();
+      const name = document.getElementById('guestNameInput').value.trim();
+      const wish = document.getElementById('guestWishInput').value.trim();
 
       if (name) {
         if (wish) {
-          const wishList = document.getElementById('wishList');
-          const newWish = document.createElement('div');
-          newWish.className = 'wish-item';
-          newWish.innerHTML = `
-            <div class="wish-author">${name}</div>
-            <div class="wish-text">"${wish}"</div>
+          const feed = document.getElementById('wishFeed');
+          const item = document.createElement('div');
+          item.className = 'wish-bubble';
+          item.innerHTML = `
+            <div class="wish-author-name">${name}</div>
+            <div class="wish-body-text">"${wish}"</div>
           `;
-          wishList.prepend(newWish);
+          feed.prepend(item);
         }
 
-        showToast(attendingStatus === 'Yes' ? 'Thank you! RSVP received joyfully.' : 'Response noted with thanks.');
+        displayToast(attendanceValue === 'Yes' ? 'Thank you! RSVP received joyfully.' : 'Response recorded with thanks.');
         document.getElementById('rsvpForm').reset();
-        selectAttending(document.querySelector('.radio-tile'), 'Yes');
-        playTone(600, 0.4, 'sine', 0.1);
+        pickAttendance(document.querySelector('.radio-option'), 'Yes');
+        triggerNote(600, 0.3, 0.1);
       }
     });
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.innerText = msg;
+    function displayToast(text) {
+      const toast = document.getElementById('toastMsg');
+      toast.innerText = text;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
+    /* Floating Rose Petals Animation Canvas */
     const canvas = document.getElementById('petals-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -1026,25 +1039,24 @@
       opacity: Math.random() * 0.5 + 0.3
     }));
 
-    function drawPetal(petal) {
+    function drawPetal(p) {
       ctx.save();
-      ctx.translate(petal.x, petal.y);
-      ctx.rotate((petal.rotation * Math.PI) / 180);
-      ctx.globalAlpha = petal.opacity;
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.globalAlpha = p.opacity;
 
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.bezierCurveTo(-petal.size, -petal.size, -petal.size * 1.5, petal.size, 0, petal.size * 1.8);
-      ctx.bezierCurveTo(petal.size * 1.5, petal.size, petal.size, -petal.size, 0, 0);
+      ctx.bezierCurveTo(-p.size, -p.size, -p.size * 1.5, p.size, 0, p.size * 1.8);
+      ctx.bezierCurveTo(p.size * 1.5, p.size, p.size, -p.size, 0, 0);
       ctx.fillStyle = '#f2b5b8';
       ctx.fill();
 
       ctx.restore();
     }
 
-    function animatePetals() {
+    function renderPetals() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       petals.forEach(p => {
         p.y += p.speedY;
         p.x += Math.sin(p.y * 0.01) + p.speedX;
@@ -1054,13 +1066,11 @@
           p.y = -20;
           p.x = Math.random() * canvas.width;
         }
-
         drawPetal(p);
       });
-
-      requestAnimationFrame(animatePetals);
+      requestAnimationFrame(renderPetals);
     }
-    animatePetals();
+    renderPetals();
   </script>
 </body>
 </html>
