@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burgundy Damask Swan Envelope</title>
+    <title>Photorealistic Burgundy Damask Envelope</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
 
         body {
-            background-color: #0c0809;
+            background-color: #080607;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,121 +29,8 @@
             position: relative;
             background-color: #f7f3ed;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9);
             border-radius: 14px;
-        }
-
-        /* ENVELOPE BASE */
-        .envelope-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #4a0e17;
-            z-index: 10;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
-        }
-
-        .envelope-container.open {
-            transform: scale(1.08);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* PAPER TEXTURE & EMBOSSED DAMASK PATTERN */
-        .damask-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 3;
-            opacity: 0.15;
-            background-image: radial-gradient(#fff 0.75px, transparent 0.75px), radial-gradient(#000 0.75px, transparent 0.75px);
-            background-size: 8px 8px;
-            background-position: 0 0, 4px 4px;
-            mix-blend-mode: overlay;
-        }
-
-        /* SCALLOPED FLAPS OVERLAY */
-        .flap-top, .flap-bottom {
-            position: absolute;
-            width: 100%;
-            height: 50%;
-            background-color: #420b13;
-            pointer-events: none;
-            z-index: 2;
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .flap-top {
-            top: 0;
-            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
-            filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.6));
-            background: linear-gradient(180deg, #57121c 0%, #3d0a11 100%);
-        }
-
-        .flap-bottom {
-            bottom: 0;
-            clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
-            filter: drop-shadow(0px -6px 10px rgba(0, 0, 0, 0.6));
-            background: linear-gradient(0deg, #57121c 0%, #3d0a11 100%);
-        }
-
-        .envelope-container.open .flap-top {
-            transform: translateY(-100%);
-        }
-
-        .envelope-container.open .flap-bottom {
-            transform: translateY(100%);
-        }
-
-        /* CREAM SWAN WAX SEAL */
-        .wax-seal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 95px;
-            height: 95px;
-            background: radial-gradient(circle at 35% 35%, #fffef8 0%, #f3eee3 50%, #dfd5c2 85%, #b8ab94 100%);
-            border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%; /* Organic wax edge shape */
-            box-shadow: 
-                0 10px 22px rgba(0, 0, 0, 0.6),
-                inset 0 3px 5px rgba(255, 255, 255, 0.9),
-                inset 0 -4px 6px rgba(120, 100, 80, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 20;
-            border: 1px solid #e8e2d5;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .wax-seal:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
-        }
-
-        .wax-seal-inner {
-            width: 74px;
-            height: 74px;
-            border-radius: 50%;
-            border: 1px solid rgba(160, 140, 120, 0.25);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
-        }
-
-        .seal-swan {
-            width: 48px;
-            height: 48px;
-            fill: #7d6e5a;
-            filter: drop-shadow(1px 1px 0px rgba(255, 255, 255, 0.8));
         }
 
         /* CARD CONTENT BELOW */
@@ -160,36 +47,182 @@
             padding: 30px;
             text-align: center;
             color: #4a0e17;
+            background: radial-gradient(circle at center, #fffefb 0%, #f3ece1 100%);
         }
 
         .card-content h2 {
-            font-size: 24px;
+            font-size: 26px;
             letter-spacing: 2px;
             font-weight: 400;
+        }
+
+        /* ENVELOPE BASE CONTAINER */
+        .envelope-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #3b0a12;
+            z-index: 10;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+            perspective: 1000px;
+        }
+
+        .envelope-container.open {
+            transform: scale(1.08);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* NOISE PAPER TEXTURE */
+        .texture-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 8;
+            pointer-events: none;
+            opacity: 0.18;
+            background-image: radial-gradient(#ffffff 0.8px, transparent 0.8px), radial-gradient(#000000 0.8px, transparent 0.8px);
+            background-size: 4px 4px;
+            background-position: 0 0, 2px 2px;
+            mix-blend-mode: overlay;
+        }
+
+        /* DAMASK PATTERN BACKGROUND WITH EMBOSS EFFECT */
+        .damask-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.22;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path d="M30 5 C20 15, 10 15, 10 25 C10 35, 25 35, 30 50 C35 35, 50 35, 50 25 C50 15, 40 15, 30 5 Z M30 18 C33 22, 38 24, 38 27 C38 30, 32 30, 30 38 C28 30, 22 30, 22 27 C22 24, 27 22, 30 18 Z" fill="%23ffffff"/></svg>');
+            background-size: 60px 60px;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.3));
+        }
+
+        /* FOUR OVERLAPPING ENVELOPE FLAPS */
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #4a0d18;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* TOP FLAP WITH DAMASK & SHADOW */
+        .flap-top {
+            z-index: 5;
+            clip-path: polygon(0 0, 100% 0, 50% 50%);
+            background: linear-gradient(180deg, #5c111e 0%, #3d0912 100%);
+            filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.7));
+            transform-origin: top;
+        }
+
+        /* BOTTOM FLAP */
+        .flap-bottom {
+            z-index: 4;
+            clip-path: polygon(0 100%, 100% 100%, 50% 48%);
+            background: linear-gradient(0deg, #5c111e 0%, #360810 100%);
+            filter: drop-shadow(0px -6px 10px rgba(0, 0, 0, 0.6));
+            transform-origin: bottom;
+        }
+
+        /* LEFT & RIGHT FLAPS */
+        .flap-left {
+            z-index: 3;
+            clip-path: polygon(0 0, 0 100%, 50% 50%);
+            background: linear-gradient(90deg, #480c17 0%, #33070f 100%);
+        }
+
+        .flap-right {
+            z-index: 3;
+            clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+            background: linear-gradient(-90deg, #480c17 0%, #33070f 100%);
+        }
+
+        /* ANIMATIONS ON OPEN */
+        .envelope-container.open .flap-top {
+            transform: rotateX(160deg);
+        }
+
+        .envelope-container.open .flap-bottom {
+            transform: rotateX(-160deg);
+        }
+
+        /* REALISTIC ORGANIC CREAM WAX SEAL */
+        .wax-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 105px;
+            height: 105px;
+            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f5eee0 40%, #e1d4bf 75%, #b2a288 100%);
+            border-radius: 42% 58% 47% 53% / 54% 45% 55% 46%; /* Irregular fluid wax shape */
+            box-shadow: 
+                0 12px 28px rgba(0, 0, 0, 0.75),
+                inset 0 4px 6px rgba(255, 255, 255, 1),
+                inset 0 -5px 8px rgba(100, 85, 65, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .wax-seal:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 15px 32px rgba(0, 0, 0, 0.85);
+        }
+
+        .wax-seal-inner {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, #f8f3ea 0%, #ebdcc6 80%, #cca385 100%);
+            border: 1px solid rgba(180, 160, 135, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                inset 0 3px 6px rgba(0, 0, 0, 0.25),
+                0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .seal-swan {
+            width: 50px;
+            height: 50px;
+            fill: #7d6b54;
+            filter: drop-shadow(1px 1px 0px rgba(255, 255, 255, 0.9)) drop-shadow(-1px -1px 1px rgba(0,0,0,0.2));
         }
     </style>
 </head>
 <body>
 
     <div class="viewport">
-        <!-- CARD CONTENT HIDDEN BEHIND ENVELOPE -->
+        <!-- CARD INSIDE -->
         <div class="card-content">
             <h2>BURGUNDY SWAN CARD</h2>
-            <p style="margin-top: 10px; font-size: 14px; color: #7a323c;">Ready for Step 2!</p>
+            <p style="margin-top: 10px; font-size: 14px; color: #7a323c;">Step 1 Complete!</p>
         </div>
 
-        <!-- BURGUNDY ENVELOPE -->
+        <!-- REALISTIC BURGUNDY ENVELOPE -->
         <div class="envelope-container" id="envelope">
-            <div class="damask-pattern"></div>
+            <div class="texture-overlay"></div>
+            <div class="damask-bg"></div>
 
-            <div class="flap-top"></div>
-            <div class="flap-bottom"></div>
+            <!-- 4 ENVELOPE FLAPS -->
+            <div class="flap flap-left"></div>
+            <div class="flap flap-right"></div>
+            <div class="flap flap-bottom"></div>
+            <div class="flap flap-top"></div>
 
             <!-- CREAM SWAN WAX SEAL -->
             <div class="wax-seal" onclick="openEnvelope()">
                 <div class="wax-seal-inner">
                     <svg class="seal-swan" viewBox="0 0 24 24">
-                        <!-- Swan Motif -->
                         <path d="M18.5 12c-.83 0-1.5.67-1.5 1.5 0 .63.39 1.17.95 1.38-.28.87-1.1 1.62-2.45 1.62-1.34 0-2.5-.89-2.5-2.5 0-2.8 3.5-3.8 3.5-7 0-2.21-1.79-4-4-4-1.8 0-3.32 1.19-3.82 2.83C8.16 5.3 7.15 5 6 5c-2.21 0-4 1.79-4 4 0 2.8 3.5 3.8 3.5 7 0 2.76 2.24 5 5 5 2.88 0 4.88-1.75 5.58-3.23.68.15 1.28.23 1.92.23 2.76 0 5-2.24 5-5 0-.83-.67-1.5-1.5-1.5z"/>
                     </svg>
                 </div>
