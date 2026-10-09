@@ -1,1 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Wedding Invitation | Maham & Shiraz</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
+  <style>
+    :root {
+      --blush-pink: #f7dcdb;
+      --soft-pink: #fbeee8;
+      --deep-rose: #d18288;
+      --burgundy: #4a1525;
+      --gold-primary: #d4af37;
+      --gold-light: #f7e7a1;
+      --gold-dark: #aa820a;
+      --card-bg: #fffcf9;
+      --text-main: #3d2b2e;
+      --shadow: 0 15px 35px rgba(74, 21, 37, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f3e3df;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Floating Rose Petals Canvas */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Outer Mobile App Container */
+    .app-container {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      max-height: 900px;
+      background: #fdf6f0;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-height: 901px) {
+      .app-container {
+        border-radius: 30px;
+        height: 92vh;
+      }
+    }
+
+    /* Audio Toggle Button */
+    .audio-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 90;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(5px);
+      border: 1px solid var(--gold-primary);
+      color: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    /* ENVELOPE OVERLAY SYSTEM */
+    .envelope-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 80;
+      background: linear-gradient(135deg, #fceae6 0%, #f3d1ca 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.2s;
+    }
+
+    .envelope-overlay.opened {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-wrapper {
+      width: 88%;
+      height: 480px;
+      position: relative;
+      perspective: 1200px;
+    }
+
+    .envelope-body {
+      width: 100%;
+      height: 100%;
+      background: #f4cfc6;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(74, 21, 37, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+    }
+
+    /* Damask Pattern Overlay */
+    .envelope-body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(var(--deep-rose) 0.7px, transparent 0.7px);
+      background-size: 16px 16px;
+      opacity: 0.15;
+    }
+
+    .envelope-flaps {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .flap-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #eec1b7;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform 0.8s ease-in-out;
+      z-index: 3;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .envelope-overlay.opening .flap-top {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .flap-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 55%;
+      background: #f1c9c0;
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      z-index: 2;
+    }
+
+    .flap-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: #ebbdb1;
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      z-index: 2;
+    }
+
+    .flap-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: #ebbdb1;
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      z-index: 2;
+    }
+
+    .envelope-text {
+      position: absolute;
+      bottom: 18%;
+      width: 100%;
+      text-align: center;
+      font-family: 'Alex Brush', cursive;
+      font-size: 2rem;
+      color: var(--burgundy);
+      z-index: 4;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+      padding: 0 20px;
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 75px;
+      height: 75px;
+      background: radial-gradient(circle at 30% 30%, #f7e7a1, #d4af37 60%, #aa820a);
+      border-radius: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5), 0 8px 20px rgba(0,0,0,0.2); }
+      100% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0), 0 12px 25px rgba(0,0,0,0.3); }
+    }
+
+    .wax-seal:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .wax-seal-inner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px dashed rgba(74, 21, 37, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--burgundy);
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .wax-seal-inner i {
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+    }
+
+    .ribbon-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(253, 246, 240, 0.95);
+      z-index: 70;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .ribbon-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .bow-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bow-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 10px 15px rgba(209, 130, 136, 0.4));
+      animation: floatBow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBow {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-8px) scale(1.03); }
+    }
+
+    /* MAIN SCROLLABLE INVITATION */
+    .scroll-view {
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 10;
+      padding-bottom: 40px;
+    }
+
+    .scroll-view::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scroll-view::-webkit-scrollbar-thumb {
+      background: var(--deep-rose);
+      border-radius: 4px;
+    }
+
+    .hero-section {
+      position: relative;
+      padding: 40px 20px 30px;
+      text-align: center;
+      background: linear-gradient(180deg, #fff0ed 0%, #fdf6f0 100%);
+      overflow: hidden;
+    }
+
+    .floral-arch-frame {
+      border: 2px solid var(--gold-primary);
+      border-radius: 180px 180px 15px 15px;
+      padding: 40px 20px 30px;
+      background: rgba(255, 252, 249, 0.9);
+      box-shadow: inset 0 0 20px rgba(247, 220, 219, 0.5), 0 10px 30px rgba(74, 21, 37, 0.05);
+      position: relative;
+    }
+
+    .monogram-badge {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 15px;
+      border: 1px solid var(--gold-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    }
+
+    .host-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #7a525d;
+      margin-bottom: 8px;
+    }
+
+    .host-names {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .couple-title {
+      margin: 25px 0 15px;
+    }
+
+    .bride-name, .groom-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    .ampersand {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.5rem;
+      color: var(--gold-dark);
+      margin: 5px 0;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .divider-line {
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .divider-icon {
+      color: var(--gold-primary);
+      font-size: 0.8rem;
+    }
+
+    .details-card {
+      background: #fff;
+      margin: 0 20px 25px;
+      border-radius: 20px;
+      padding: 25px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .section-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: var(--burgundy);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .calendar-widget {
+      background: #fdf8f5;
+      border: 1px solid var(--blush-pink);
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .calendar-header {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--burgundy);
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    .day-name {
+      font-weight: 600;
+      color: var(--deep-rose);
+      padding-bottom: 5px;
+    }
+
+    .day-number {
+      padding: 6px 0;
+      color: #666;
+      border-radius: 50%;
+    }
+
+    .day-number.highlight {
+      background: var(--burgundy);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(74, 21, 37, 0.3);
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .info-row i {
+      color: var(--gold-dark);
+      font-size: 1.1rem;
+      width: 20px;
+    }
+
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0 10px;
+    }
+
+    .timer-box {
+      background: linear-gradient(145deg, #fff0ed, #fbeee8);
+      border: 1px solid var(--blush-pink);
+      border-radius: 12px;
+      width: 65px;
+      padding: 8px 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+    }
+
+    .timer-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+
+    .timer-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+    }
+
+    .venue-box {
+      background: #faf2ee;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 15px;
+      border-left: 4px solid var(--gold-primary);
+      text-align: left;
+    }
+
+    .venue-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--burgundy);
+      margin-bottom: 5px;
+    }
+
+    .venue-address {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--burgundy);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .rsvp-card {
+      background: #fff;
+      margin: 0 20px 25px;
+      border-radius: 20px;
+      padding: 25px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e0d0cc;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #fffcfb;
+    }
+
+    .attendance-selector {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .radio-tile {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #e0d0cc;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      background: #fff;
+    }
+
+    .radio-tile.selected {
+      background: var(--blush-pink);
+      border-color: var(--burgundy);
+      color: var(--burgundy);
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .wishes-card {
+      background: #fff;
+      margin: 0 20px 30px;
+      border-radius: 20px;
+      padding: 25px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow);
+    }
+
+    .wish-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .wish-item {
+      background: #fdf8f6;
+      border-left: 3px solid var(--deep-rose);
+      padding: 12px 15px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.85rem;
+    }
+
+    .wish-author {
+      font-weight: 700;
+      color: var(--burgundy);
+      margin-bottom: 3px;
+    }
+
+    .wish-text {
+      color: #555;
+      font-style: italic;
+    }
+
+    .toast {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--burgundy);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      z-index: 200;
+      transition: transform 0.4s ease;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Petals Background Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <div class="app-container">
+    
+    <!-- Audio Button -->
+    <button class="audio-btn" id="audioToggle" title="Toggle Sound">
+      <i class="fa-solid fa-music"></i>
+    </button>
+
+    <!-- Interactive Envelope Overlay -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+      <div class="envelope-wrapper">
+        <div class="envelope-body">
+          <div class="envelope-flaps">
+            <div class="flap-top"></div>
+            <div class="flap-left"></div>
+            <div class="flap-right"></div>
+            <div class="flap-bottom"></div>
+          </div>
+          
+          <div class="envelope-text">
+            Requests the pleasure<br>of your company
+          </div>
+
+          <!-- Wax Seal Button -->
+          <div class="wax-seal" id="waxSealBtn">
+            <div class="wax-seal-inner">
+              <i class="fa-solid fa-crown"></i>
+              <span>Open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ribbon Bow Reveal -->
+    <div class="ribbon-overlay" id="ribbonOverlay">
+      <div class="bow-container">
+        <svg class="bow-svg" viewBox="0 0 100 100" fill="none">
+          <path d="M50 45 C30 20 10 35 35 50 C10 65 30 80 50 55 C70 80 90 65 65 50 C90 35 70 20 50 45 Z" fill="#d18288" />
+          <circle cx="50" cy="50" r="7" fill="#d4af37" />
+          <path d="M45 54 L30 85 M55 54 L70 85" stroke="#d18288" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Scrollable Card Area -->
+    <div class="scroll-view" id="mainCardView">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="floral-arch-frame">
+          <div class="monogram-badge">M & S</div>
+          
+          <div class="host-text">With great joy and gratitude</div>
+          <div class="host-names">
+            Mr. Farooq Hussain<br>& Tabassum Farooq
+          </div>
+          
+          <div class="host-text">Invite you to the wedding ceremony of their beloved daughter</div>
+          
+          <div class="couple-title">
+            <div class="bride-name">Maham Farooq</div>
+            <div class="ampersand">with</div>
+            <div class="groom-name">Shiraz Hussain</div>
+          </div>
+
+          <div class="divider">
+            <div class="divider-line"></div>
+            <i class="fa-solid fa-heart divider-icon"></i>
+            <div class="divider-line"></div>
+          </div>
+
+          <p style="font-size: 0.85rem; color: #777; font-style: italic;">
+            "And among His signs is that He created for you mates from among yourselves..."
+          </p>
+        </div>
+      </section>
+
+      <!-- Details Section -->
+      <section class="details-card">
+        <h2 class="section-heading">Save The Date</h2>
+
+        <!-- January 2027 Calendar -->
+        <div class="calendar-widget">
+          <div class="calendar-header">January 2027</div>
+          <div class="calendar-grid">
+            <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div>
+            <div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div>
+            <div class="day-name">S</div>
+            
+            <div class="day-number"></div><div class="day-number"></div><div class="day-number"></div><div class="day-number"></div><div class="day-number"></div>
+            <div class="day-number">1</div><div class="day-number">2</div>
+            <div class="day-number">3</div><div class="day-number">4</div><div class="day-number">5</div><div class="day-number">6</div><div class="day-number">7</div><div class="day-number">8</div><div class="day-number">9</div>
+            <div class="day-number">10</div><div class="day-number">11</div><div class="day-number">12</div><div class="day-number">13</div><div class="day-number">14</div>
+            <div class="day-number highlight">15</div>
+            <div class="day-number">16</div>
+            <div class="day-number">17</div><div class="day-number">18</div><div class="day-number">19</div><div class="day-number">20</div><div class="day-number">21</div><div class="day-number">22</div><div class="day-number">23</div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>Friday, 15th January 2027</span>
+        </div>
+
+        <div class="info-row">
+          <i class="fa-regular fa-clock"></i>
+          <span>Dinner Serving at <strong>9:00 PM</strong></span>
+        </div>
+
+        <!-- Timer -->
+        <div class="timer-container">
+          <div class="timer-box"><div class="timer-val" id="days">00</div><div class="timer-label">Days</div></div>
+          <div class="timer-box"><div class="timer-val" id="hours">00</div><div class="timer-label">Hours</div></div>
+          <div class="timer-box"><div class="timer-val" id="mins">00</div><div class="timer-label">Mins</div></div>
+          <div class="timer-box"><div class="timer-val" id="secs">00</div><div class="timer-label">Secs</div></div>
+        </div>
+
+        <!-- Venue Location -->
+        <div class="venue-box">
+          <div class="venue-title">La Glamor Banquet</div>
+          <div class="venue-address">
+            Address: D, 8 Karachi, near Sakhi Hassan, D-8 Block J North Nazimabad Town, Karachi, Sindh, Pakistan
+          </div>
+          <a href="https://maps.google.com/?q=La+Glamor+Banquet+North+Nazimabad+Karachi" target="_blank" class="map-btn">
+            <i class="fa-solid fa-location-dot"></i> Get Directions
+          </a>
+        </div>
+      </section>
+
+      <!-- RSVP Section -->
+      <section class="rsvp-card">
+        <h2 class="section-heading">Kindly Respond</h2>
+        <form id="rsvpForm">
+          <div class="form-group">
+            <label>Your Full Name</label>
+            <input type="text" id="guestName" class="form-control" placeholder="Enter your name" required />
+          </div>
+
+          <div class="form-group">
+            <label>Will you attend?</label>
+            <div class="attendance-selector">
+              <div class="radio-tile selected" onclick="selectAttending(this, 'Yes')">Joyfully Accept</div>
+              <div class="radio-tile" onclick="selectAttending(this, 'No')">Regretfully Decline</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Warm Wishes / Message</label>
+            <textarea id="guestWish" class="form-control" rows="3" placeholder="Leave a message..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Confirmation</button>
+        </form>
+      </section>
+
+      <!-- Wishes Guestbook -->
+      <section class="wishes-card">
+        <h2 class="section-heading" style="margin-bottom:10px;">Guest Blessings</h2>
+        <div class="wish-list" id="wishList">
+          <div class="wish-item">
+            <div class="wish-author">Uncle Tariq & Family</div>
+            <div class="wish-text">"Wishing Maham and Shiraz a lifetime of endless love, laughter, and happiness together!"</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="toast" id="toast">Response submitted! Thank you.</div>
+
+  </div>
+
+  <script>
+    let audioCtx = null;
+    let isPlaying = false;
+    let musicInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, duration, type = 'sine', gainVal = 0.1) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function startAmbientMusic() {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 392.00];
+      let step = 0;
+      isPlaying = true;
+      document.getElementById('audioToggle').style.borderColor = '#4a1525';
+
+      musicInterval = setInterval(() => {
+        if (!isPlaying) return;
+        playTone(notes[step % notes.length], 1.5, 'sine', 0.05);
+        step++;
+      }, 1200);
+    }
+
+    function stopAmbientMusic() {
+      isPlaying = false;
+      if (musicInterval) clearInterval(musicInterval);
+      document.getElementById('audioToggle').style.borderColor = '#d4af37';
+    }
+
+    document.getElementById('audioToggle').addEventListener('click', () => {
+      if (isPlaying) {
+        stopAmbientMusic();
+      } else {
+        startAmbientMusic();
+      }
+    });
+
+    const waxSealBtn = document.getElementById('waxSealBtn');
+    const envelopeOverlay = document.getElementById('envelopeOverlay');
+    const ribbonOverlay = document.getElementById('ribbonOverlay');
+
+    waxSealBtn.addEventListener('click', () => {
+      initAudio();
+      playTone(400, 0.1, 'triangle', 0.2);
+      setTimeout(() => playTone(600, 0.3, 'sine', 0.15), 100);
+
+      envelopeOverlay.classList.add('opening');
+
+      setTimeout(() => {
+        ribbonOverlay.classList.add('active');
+        playTone(523.25, 0.8, 'sine', 0.1);
+      }, 700);
+
+      setTimeout(() => {
+        envelopeOverlay.classList.add('opened');
+        ribbonOverlay.classList.remove('active');
+        startAmbientMusic();
+      }, 1800);
+    });
+
+    const targetDate = new Date('January 15, 2027 21:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('mins').innerText = mins < 10 ? '0' + mins : mins;
+        document.getElementById('secs').innerText = secs < 10 ? '0' + secs : secs;
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    let attendingStatus = 'Yes';
+
+    function selectAttending(element, status) {
+      document.querySelectorAll('.radio-tile').forEach(tile => tile.classList.remove('selected'));
+      element.classList.add('selected');
+      attendingStatus = status;
+      playTone(500, 0.1, 'sine', 0.05);
+    }
+
+    document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('guestName').value.trim();
+      const wish = document.getElementById('guestWish').value.trim();
+
+      if (name) {
+        if (wish) {
+          const wishList = document.getElementById('wishList');
+          const newWish = document.createElement('div');
+          newWish.className = 'wish-item';
+          newWish.innerHTML = `
+            <div class="wish-author">${name}</div>
+            <div class="wish-text">"${wish}"</div>
+          `;
+          wishList.prepend(newWish);
+        }
+
+        showToast(attendingStatus === 'Yes' ? 'Thank you! RSVP received joyfully.' : 'Response noted with thanks.');
+        document.getElementById('rsvpForm').reset();
+        selectAttending(document.querySelector('.radio-tile'), 'Yes');
+        playTone(600, 0.4, 'sine', 0.1);
+      }
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const petals = Array.from({ length: 22 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      size: Math.random() * 8 + 6,
+      speedY: Math.random() * 1.2 + 0.8,
+      speedX: Math.random() * 0.8 - 0.4,
+      rotation: Math.random() * 360,
+      rotSpeed: Math.random() * 2 - 1,
+      opacity: Math.random() * 0.5 + 0.3
+    }));
+
+    function drawPetal(petal) {
+      ctx.save();
+      ctx.translate(petal.x, petal.y);
+      ctx.rotate((petal.rotation * Math.PI) / 180);
+      ctx.globalAlpha = petal.opacity;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(-petal.size, -petal.size, -petal.size * 1.5, petal.size, 0, petal.size * 1.8);
+      ctx.bezierCurveTo(petal.size * 1.5, petal.size, petal.size, -petal.size, 0, 0);
+      ctx.fillStyle = '#f2b5b8';
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      petals.forEach(p => {
+        p.y += p.speedY;
+        p.x += Math.sin(p.y * 0.01) + p.speedX;
+        p.rotation += p.rotSpeed;
+
+        if (p.y > canvas.height + 20) {
+          p.y = -20;
+          p.x = Math.random() * canvas.width;
+        }
+
+        drawPetal(p);
+      });
+
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+  </script>
+</body>
+</html>
