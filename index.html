@@ -47,7 +47,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Hide scrollbars for clean look */
+        /* Hide scrollbars */
         .phone-frame::-webkit-scrollbar {
             display: none;
         }
@@ -56,7 +56,7 @@
             scrollbar-width: none;
         }
 
-        /* --- ENVELOPE OVERLAY --- */
+        /* ENVELOPE OVERLAY */
         .envelope-wrapper {
             position: absolute;
             top: 0;
@@ -137,14 +137,14 @@
             padding: 0 20px;
         }
 
-        /* --- CARD SECTIONS --- */
+        /* CARD SECTIONS */
         .section {
             padding: 40px 24px;
             text-align: center;
             position: relative;
         }
 
-        /* Hero / Header Section */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             background: linear-gradient(180deg, rgba(248,236,238,0.6) 0%, rgba(253,251,251,1) 100%);
@@ -186,14 +186,18 @@
             margin-bottom: 20px;
         }
 
+        /* Embedded Illustration Container */
         .illustration-card {
             width: 100%;
             height: 200px;
-            background: url('https://images.unsplash.com/photo-1545232979-fbf5963d13a2?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            background-color: #fceef0;
             border-radius: 120px 120px 0 0;
             border: 1px solid var(--dusty-rose);
             margin: 20px 0;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
         .date-box {
@@ -308,7 +312,7 @@
             font-weight: 600;
         }
 
-        /* RSVP Form Section */
+        /* RSVP Section */
         .rsvp-form {
             display: flex;
             flex-direction: column;
@@ -344,14 +348,42 @@
         .rsvp-button:hover {
             background-color: #985f6a;
         }
+    </style>
+</head>
+<body>
 
-        /* Bottom Music Player Floating Toggle */
-        .audio-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 42px;
-            height: 42px;
-            background-color: #fff;
-            border: 1px solid var(--dusty-rose);
-            border-radius: 50%;
+    <div class="phone-frame">
+
+        <!-- OVERLAY ENVELOPE -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope">
+                <div class="envelope-flap"></div>
+                <div class="wax-seal" onclick="openEnvelope()">D&R</div>
+                <div class="envelope-text">Requests the pleasure of your company</div>
+            </div>
+        </div>
+
+        <!-- HERO SECTION -->
+        <section class="section hero">
+            <div>
+                <div class="monogram-crest">D&R</div>
+                <p class="subtitle">We request the pleasure of your company</p>
+                <h1 class="couple-names">Diana & Richard</h1>
+                <p class="subtitle">To celebrate our wedding</p>
+            </div>
+
+            <!-- EMBEDDED VECTOR ILLUSTRATION -->
+            <div class="illustration-card">
+                <svg width="200" height="150" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hotel/Villa Facade -->
+                    <rect x="50" y="50" width="100" height="70" fill="#f8ecee" stroke="#b57c88" stroke-width="1.5"/>
+                    <polygon points="40,50 100,20 160,50" fill="#f1dadf" stroke="#b57c88" stroke-width="1.5"/>
+                    <!-- Columns -->
+                    <line x1="65" y1="50" x2="65" y2="120" stroke="#b57c88" stroke-width="1.5"/>
+                    <line x1="85" y1="50" x2="85" y2="120" stroke="#b57c88" stroke-width="1.5"/>
+                    <line x1="115" y1="50" x2="115" y2="120" stroke="#b57c88" stroke-width="1.5"/>
+                    <line x1="135" y1="50" x2="135" y2="120" stroke="#b57c88" stroke-width="1.5"/>
+                    <!-- Entrance Arch -->
+                    <path d="M90 120 V95 A10 10 0 0 1 110 95 V120 Z" fill="#e8d3d8" stroke="#b57c88" stroke-width="1.5"/>
+                    <!-- Botanical Flourishes -->
+                    <circle cx="40" cy="110" r="12
