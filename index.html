@@ -114,30 +114,6 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
   <div class="sealwrap" id="sw"><div class="aura"></div><div class="ring"></div><div class="seal"></div></div>
   <div class="tap">Tap the seal to open</div>
  </div>
- .scroll {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 28px;
-    color: var(--ink, #5a4e6b);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    animation: bounceScroll 2s ease-in-out infinite;
-    z-index: 10;
-    pointer-events: none;
-}
-
-@keyframes bounceScroll {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(8px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(4px);
-    }
-}
 </div>
 
 <main id="invite">
