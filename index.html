@@ -104,10 +104,15 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
 .scroll{position:absolute;bottom:14px;left:0;right:0;margin:0 auto;font:500 9px "Cinzel",serif;letter-spacing:.3em;color:#4a2a3d}
 @media (prefers-reduced-motion:reduce){.bgi,.glow,.mist,.rays:before,.shine:before,.fx i,.fly,.dv,.wing,.ring,.tap,.gs{animation:none!important}.open .seal,.open .aura{animation-duration:.01s!important}*{transition-duration:.01s!important;transition-delay:0s!important}.slide>*{opacity:1!important;transform:none!important;filter:none!important}}
 
+.slide {
+  position: relative;
+}
+
+/* Perfect horizontal centering */
 .scroll {
   position: absolute;
-  bottom: 50px;
   left: 50%;
+  bottom: 20px;
   transform: translateX(-50%);
   font-size: 25px;
   color: #4a2338;
