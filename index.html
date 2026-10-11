@@ -105,27 +105,27 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
 @media (prefers-reduced-motion:reduce){.bgi,.glow,.mist,.rays:before,.shine:before,.fx i,.fly,.dv,.wing,.ring,.tap,.gs{animation:none!important}.open .seal,.open .aura{animation-duration:.01s!important}*{transition-duration:.01s!important;transition-delay:0s!important}.slide>*{opacity:1!important;transform:none!important;filter:none!important}}
 
 .scroll {
-  font-size: 32px;
-  color: #4a2338; /* Deep plum matching your text */
+  font-size: 25px; /* Smaller, elegant size */
+  color: #4a2338;  /* Matching plum color */
   font-weight: bold;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
   display: inline-block;
-  margin-top: 15px;
-  animation: bounce 1.8s ease-in-out infinite;
+  margin-top: 10px;
+  animation: gentleBounce 2s ease-in-out infinite;
 }
 
-@keyframes bounce {
+/* Reduced, subtle bounce animation */
+@keyframes gentleBounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(10px);
+    transform: translateY(5px); /* Toned down from 10px */
   }
   60% {
-    transform: translateY(5px);
+    transform: translateY(2.5px);
   }
 }
-
 
  
 </style></head><body>
