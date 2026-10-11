@@ -235,14 +235,14 @@ const go=(k,ms,f)=>setTimeout(()=>{b.add(k);f&&f()},calm?0:ms);go("zoom",2750);g
 env.addEventListener("click",openIt);
 env.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openIt()}});
 
-  const scrollArrow = document.getElementById("scrollArrow");
+const scrollArrows = document.querySelectorAll(".scroll");
 const invite = document.getElementById("invite");
 
 invite.addEventListener("scroll", () => {
   if (invite.scrollTop > 10) {
-    scrollArrow.classList.add("hide");
+    scrollArrows.forEach(arrow => arrow.classList.add("hide"));
   } else {
-    scrollArrow.classList.remove("hide");
+    scrollArrows.forEach(arrow => arrow.classList.remove("hide"));
   }
 }, { passive: true });
 </script></body></html>
