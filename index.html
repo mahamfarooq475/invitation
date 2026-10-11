@@ -236,13 +236,21 @@ env.addEventListener("click",openIt);
 env.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openIt()}});
 
 const scrollArrows = document.querySelectorAll(".scroll");
+const slides = document.querySelectorAll(".slide");
 const invite = document.getElementById("invite");
 
 invite.addEventListener("scroll", () => {
-  if (invite.scrollTop > 10) {
-    scrollArrows.forEach(arrow => arrow.classList.add("hide"));
-  } else {
-    scrollArrows.forEach(arrow => arrow.classList.remove("hide"));
-  }
+  slides.forEach((slide, index) => {
+    const arrow = scrollArrows[index];
+    if (!arrow) return;
+
+    // Check if the slide has been scrolled past
+    const slideTop = slide.offsetTop - invite.scrollTop;
+    if (slideTop < -20) {
+      arrow.classList.add("hide");
+    } else {
+      arrow.classList.remove("hide");
+    }
+  });
 }, { passive: true });
 </script></body></html>
