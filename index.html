@@ -47,37 +47,38 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
 .st{width:var(--s);height:var(--s);background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);animation:tw2 var(--d) ease-in-out var(--l) infinite}
 @keyframes tw2{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(90deg)}}
 #stage{position:fixed;inset:0;z-index:3;display:grid;place-items:center;overflow:hidden}
-#stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#f8d9d2,#d9a199);transition:opacity 1.4s ease}
+#stage:before{content:"";position:absolute;inset:0;background:var(--img) center/cover;filter:blur(26px);transform:scale(1.2);transition:opacity 1.4s ease}
 .zoom #stage:before{opacity:0}
 .fade #stage{opacity:0;pointer-events:none;transition:opacity 1.1s ease}
 .done #stage{visibility:hidden}
-.card{position:relative;width:min(88vw,calc(80svh*.5611));aspect-ratio:335/597;cursor:pointer;outline:0;-webkit-tap-highlight-color:transparent;perspective:1500px}
-.card:focus-visible{outline:3px solid #fff;outline-offset:8px}
+.card{position:relative;width:min(100vw,calc(100vh*.5611));height:100vh;cursor:pointer;outline:0;-webkit-tap-highlight-color:transparent;perspective:2200px}
+.card:focus-visible{outline:3px solid #fff;outline-offset:-8px}
+@supports(height:100dvh){.card{width:min(100vw,calc(100dvh*.5611));height:100dvh}}
 .box{position:absolute;inset:0;transform-style:preserve-3d}
-.base{position:absolute;inset:0;background:var(--img) center/100% 100%;transform:translateZ(-1px);box-shadow:0 22px 40px rgba(110,45,60,.38);transition:opacity .25s linear .65s}
+.base{position:absolute;inset:0;background:var(--img) center/cover;transform:translateZ(-1px);transition:opacity .25s linear .65s}
 .open .base{opacity:0}
 .fl{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 2.2s cubic-bezier(.45,.05,.25,1) var(--d,.5s);will-change:transform}
 .open .fl i{opacity:0;transition:opacity .6s ease 2.15s}
 .fl i{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.fl .a{background:var(--img) center/100% 100%}
+.fl .a{background:var(--img) center/cover}
 .fl .b{background:linear-gradient(150deg,#ebbdb5,#d39a92 60%,#e6b2aa)}
-.ft{transform-origin:50% 0}.ft .a{clip-path:polygon(0 0,100% 0,50% 53.4%)}.ft .b{clip-path:polygon(0 100%,100% 100%,50% 46.6%);transform:rotateX(180deg)}
-.fb{transform-origin:50% 100%;--d:.6s}.fb .a{clip-path:polygon(0 100%,100% 100%,50% 53.4%)}.fb .b{clip-path:polygon(0 0,100% 0,50% 46.6%);transform:rotateX(180deg)}
-.fL{transform-origin:0 50%;--d:.7s}.fL .a{clip-path:polygon(0 0,50% 53.4%,0 100%)}.fL .b{clip-path:polygon(100% 0,50% 53.4%,100% 100%);transform:rotateY(180deg)}
-.fR{transform-origin:100% 50%;--d:.7s}.fR .a{clip-path:polygon(100% 0,100% 100%,50% 53.4%)}.fR .b{clip-path:polygon(0 0,0 100%,50% 53.4%);transform:rotateY(180deg)}
+.ft{transform-origin:50% 0}.ft .a{clip-path:var(--c-ft-a)}.ft .b{clip-path:var(--c-ft-b);transform:rotateX(180deg)}
+.fb{transform-origin:50% 100%;--d:.6s}.fb .a{clip-path:var(--c-fb-a)}.fb .b{clip-path:var(--c-fb-b);transform:rotateX(180deg)}
+.fL{transform-origin:0 50%;--d:.7s}.fL .a{clip-path:var(--c-fL-a)}.fL .b{clip-path:var(--c-fL-b);transform:rotateY(180deg)}
+.fR{transform-origin:100% 50%;--d:.7s}.fR .a{clip-path:var(--c-fR-a)}.fR .b{clip-path:var(--c-fR-b);transform:rotateY(180deg)}
 .open .ft{transform:rotateX(180deg)}.open .fb{transform:rotateX(-180deg)}.open .fL{transform:rotateY(-180deg)}.open .fR{transform:rotateY(180deg)}
 .sealwrap{position:absolute;inset:0;pointer-events:none;z-index:5}
-.seal{will-change:transform,opacity;position:absolute;left:49.10%;top:53.35%;width:39.10%;aspect-ratio:0.9291;transform:translate(-50%,-50%);background:var(--seal) center/100% 100% no-repeat;filter:drop-shadow(0 3px 5px rgba(80,30,40,.4))}
-.aura{position:absolute;left:49.10%;top:53.35%;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,228,140,.95),rgba(255,205,100,.4) 38%,transparent 68%);opacity:0;transform:translate(-50%,-50%) scale(.4)}
+.seal{will-change:transform,opacity;position:absolute;left:var(--sx,49.1%);top:var(--sy,53.35%);width:var(--sw,39.1%);aspect-ratio:0.9291;transform:translate(-50%,-50%);background:var(--seal) center/100% 100% no-repeat;filter:drop-shadow(0 3px 5px rgba(80,30,40,.4))}
+.aura{position:absolute;left:var(--sx,49.1%);top:var(--sy,53.35%);width:calc(var(--sw,39.1%)*2);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,228,140,.95),rgba(255,205,100,.4) 38%,transparent 68%);opacity:0;transform:translate(-50%,-50%) scale(.4)}
 .open .seal{animation:rel 1.5s cubic-bezier(.3,.1,.2,1) forwards}
 .open .aura{animation:aura 1.5s ease-out forwards}
 @keyframes rel{0%{transform:translate(-50%,-50%) scale(1);opacity:1}20%{transform:translate(-50%,-53%) scale(1.12)}70%{opacity:1}100%{transform:translate(-50%,calc(-50% - 34svh)) scale(.8) rotate(-8deg);opacity:0}}
 @keyframes aura{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}25%{opacity:1;transform:translate(-50%,-53%) scale(1)}100%{opacity:0;transform:translate(-50%,calc(-50% - 34svh)) scale(.7)}}
-.gs{position:absolute;left:49.10%;top:53.35%;width:var(--s);height:var(--s);margin:-4px;border-radius:50%;background:radial-gradient(circle,#fff6d0,#ffd36a 60%,transparent 70%);box-shadow:0 0 8px 2px rgba(255,214,110,.85);opacity:0;animation:gs 1.5s ease-out var(--dl) forwards}
+.gs{position:absolute;left:var(--sx,49.1%);top:var(--sy,53.35%);width:var(--s);height:var(--s);margin:-4px;border-radius:50%;background:radial-gradient(circle,#fff6d0,#ffd36a 60%,transparent 70%);box-shadow:0 0 8px 2px rgba(255,214,110,.85);opacity:0;animation:gs 1.5s ease-out var(--dl) forwards}
 @keyframes gs{0%{opacity:0;transform:translate(0,0) scale(.3)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1)}}
-.ring{position:absolute;left:49.10%;top:53.35%;width:44.97%;aspect-ratio:1;border:2px solid rgba(255,255,255,.95);border-radius:50%;animation:ring 2.2s ease-out infinite}
+.ring{position:absolute;left:var(--sx,49.1%);top:var(--sy,53.35%);width:calc(var(--sw,39.1%)*1.15);aspect-ratio:1;border:2px solid rgba(255,255,255,.95);border-radius:50%;animation:ring 2.2s ease-out infinite}
 @keyframes ring{0%{transform:translate(-50%,-50%) scale(.85);opacity:.9}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
-.tap{position:absolute;left:0;right:0;top:calc(100% + 14px);text-align:center;font:italic 500 23px "Cormorant Garamond",Georgia,serif;color:#5a1d3a;animation:pulse 2.2s ease-in-out infinite}
+.tap{position:absolute;left:0;right:0;bottom:6%;text-align:center;font:italic 500 23px "Cormorant Garamond",Georgia,serif;color:#5a1d3a;animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.55}}
 .open .ring,.open .tap{opacity:0;animation:none;transition:opacity .3s}
 #invite{position:fixed;inset:0;z-index:1;overflow-y:auto;scroll-snap-type:y proximity;opacity:0;visibility:hidden;color:#2b0b1f;font:500 18px/1.5 "Cormorant Garamond",Georgia,serif;transition:opacity 1.3s ease,visibility 0s linear 1.3s}
@@ -102,49 +103,14 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
 .cd strong{display:block;font:500 28px/1 "Cinzel",Georgia,serif}
 .cd small{font:500 8.5px "Cinzel",Georgia,serif;letter-spacing:.12em;text-transform:uppercase}
 .scroll{position:absolute;bottom:14px;left:0;right:0;margin:0 auto;font:500 9px "Cinzel",serif;letter-spacing:.3em;color:#4a2a3d}
+.slide{position:relative!important}
+.scroll{position:absolute!important;left:50%!important;right:auto!important;bottom:16px!important;width:auto!important;margin:0!important;padding:0!important;text-align:center!important;font-size:25px;letter-spacing:0;color:#4a2338;font-weight:bold;text-shadow:0 0 8px rgba(255,255,255,.9);animation:gentleBounce 2s ease-in-out infinite;transition:opacity .4s ease,visibility .4s ease;z-index:10;pointer-events:none}
+.scroll.hide{opacity:0;visibility:hidden}
+@keyframes gentleBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
+#snd{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:44px;height:44px;padding:0;display:grid;place-items:center;border-radius:50%;border:1.5px solid #4a2338;background:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#4a2338;cursor:pointer;z-index:30;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
+.reveal #snd{opacity:1;visibility:visible}
+#snd .x{display:none}#snd.off .x{display:inline}#snd.off .w{display:none}
 @media (prefers-reduced-motion:reduce){.bgi,.glow,.mist,.rays:before,.shine:before,.fx i,.fly,.dv,.wing,.ring,.tap,.gs{animation:none!important}.open .seal,.open .aura{animation-duration:.01s!important}*{transition-duration:.01s!important;transition-delay:0s!important}.slide>*{opacity:1!important;transform:none!important;filter:none!important}}
-
-.slide {
-  position: relative !important;
-}
-
-.scroll {
-  position: absolute !important;
-  left: 50% !important;
-  right: auto !important;
-  bottom: 16px !important;
-  width: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-  font-size: 25px;
-  color: #4a2338;
-  font-weight: bold;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
-  animation: gentleBounce 2s ease-in-out infinite;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.scroll.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Keyframes combining centering transform with subtle bounce */
-@keyframes gentleBounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, 5px);
-  }
-  60% {
-    transform: translate(-50%, 2.5px);
-  }
-}
-  
 </style></head><body>
 <div class="bg"><div class="bgz" id="bgz"><div class="bgi"></div></div></div><div class="fog"></div><div class="glow"></div><div class="mist"></div><div class="mist m2"></div><div class="rays"></div><div class="shine"></div><div class="fx" id="fx"></div>
 <div id="stage">
@@ -155,30 +121,27 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
   </div>
   <div class="sealwrap" id="sw"><div class="aura"></div><div class="ring"></div><div class="seal"></div></div>
   <div class="tap">Tap the seal to open</div>
-  
  </div>
 </div>
 
 <main id="invite">
 <section class="slide">
  <svg class="mono" viewBox="0 0 66 66"><circle cx="33" cy="33" r="31" fill="none" stroke="#7a3a5c" stroke-width="1"/><circle cx="33" cy="33" r="27.5" fill="rgba(255,255,255,.25)" stroke="#7a3a5c" stroke-width=".6"/><text id="mm" x="23" y="40" font-family="Pinyon Script,cursive" font-size="27" fill="#26081a" text-anchor="middle"></text><text id="ms" x="43" y="43" font-family="Pinyon Script,cursive" font-size="27" fill="#26081a" text-anchor="middle"></text></svg>
- <p class="reg" id="p1"></p><p class="reg" id="p2"></p>
+ <p class="reg" id="p1"></p>
  <p class="cap" style="margin-top:6px">request the pleasure of your company</p><p class="cap">at the wedding of their daughter</p>
  <p class="scr nm" id="b1"></p><p class="cap l" id="b2"></p>
  <p class="scr with">with</p>
  <p class="scr nm" id="g1"></p><p class="cap l" id="g2"></p>
-<p class="scroll" id="scrollArrow">&darr;</p>
-
+ <p class="scroll" id="scrollArrow">&darr;</p>
 </section>
 <section class="slide">
  <p class="cap">on</p>
  <div class="dt"><span class="cap" id="mo"></span><b></b><span class="scr" id="dy"></span><b></b><span class="cap" id="yr"></span></div>
  <p class="cap l" id="wd"></p>
  <p class="cap" id="dn"></p>
- <p class="cap">at</p>
- <p class="scr" id="vn2" style="font-size:clamp(40px,12.5vw,52px)"></p>
- <p class="cap" id="area"></p>
-<p class="scroll" id="scrollArrow">&darr;</p>
+ <div class="orn"><i></i><svg viewBox="0 0 16 16"><path d="M8 14C2 9.5 1 6.5 2.6 4.4 4.2 2.4 7 3 8 5c1-2 3.8-2.6 5.4-.6C15 6.5 14 9.5 8 14z" fill="#b0507a"/></svg><i></i></div>
+ <p class="itl">With joyful hearts, we welcome you<br>to celebrate this beautiful day with us.</p>
+ <p class="scroll">&darr;</p>
 </section>
 <section class="slide">
  <p class="cap">the celebration</p>
@@ -187,8 +150,7 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
  <p class="scr" id="vn" style="font-size:clamp(38px,11.5vw,48px)"></p>
  <p class="itl" id="addr" style="margin-top:8px"></p>
  <a class="pill" id="map" href="#" target="_blank" rel="noopener">View Map</a>
-<p class="scroll" id="scrollArrow">&darr;</p>
-
+ <p class="scroll">&darr;</p>
 </section>
 <section class="slide">
  <p class="cap">counting down to</p>
@@ -199,6 +161,7 @@ body{background:#e3b1aa;color:var(--ink);font:700 17px/1.55 "Jost",system-ui,san
  <a class="pill" id="rsvp" href="#" target="_blank" rel="noopener">RSVP</a>
 </section>
 </main>
+<button id="snd" aria-label="Music on or off"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="x" d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 
 <script>
 const CFG={father:"Farooq Hussain",mother:"Tabassum Farooq",bride:"Maham Farooq",groom:"Shiraz Hussain",
@@ -206,16 +169,16 @@ dateISO:"2027-01-15T21:00:00+05:00",venue:"La Glamour Banquet",address:"D-8, Blo
 map:"https://www.google.com/maps/search/?api=1&query=La+Glamour+Banquet+North+Nazimabad+Karachi",rsvp:"https://wa.me/923353311915"};
 const $=i=>document.getElementById(i),D=new Date(CFG.dateISO),tz={timeZone:"Asia/Karachi"},T=(i,v)=>$(i).textContent=v;
 const sp=n=>{const a=n.split(" ");return[a[0],a.slice(1).join(" ")]},[b1,b2]=sp(CFG.bride),[g1,g2]=sp(CFG.groom),dp=o=>D.toLocaleDateString("en-GB",{...tz,...o});
-T("p1","Mr. "+CFG.father);T("p2","& Mrs. "+CFG.mother);T("b1",b1);T("b2",b2);T("g1",g1);T("g2",g2);T("mm",b1[0]);T("ms",g1[0]);
+T("p1","Mr. & Mrs. "+CFG.father);T("b1",b1);T("b2",b2);T("g1",g1);T("g2",g2);T("mm",b1[0]);T("ms",g1[0]);
 T("mo",dp({month:"long"}));T("dy",dp({day:"numeric"}));T("yr",dp({year:"numeric"}));T("wd",dp({weekday:"long"}));
 T("dn","Dinner at "+D.toLocaleTimeString("en-US",{...tz,hour:"numeric",minute:"2-digit"}));
-T("vn",CFG.venue);T("vn2",CFG.venue);T("area",CFG.area);T("addr",CFG.address);$("map").href=CFG.map;$("rsvp").href=CFG.rsvp;
+T("vn",CFG.venue);T("addr",CFG.address);$("map").href=CFG.map;$("rsvp").href=CFG.rsvp;
 function tick(){let t=Math.max(0,Math.floor((D-Date.now())/1000));
 $("d").textContent=Math.floor(t/86400);$("h").textContent=Math.floor(t%86400/3600);$("m").textContent=Math.floor(t%3600/60);$("s").textContent=t%60}
 tick();setInterval(tick,1000);
 if(document.fonts)["400 40px 'Pinyon Script'","700 14px Cinzel","600 18px 'Cormorant Garamond'","italic 700 18px 'Cormorant Garamond'"].forEach(f=>document.fonts.load(f));
 document.querySelectorAll(".slide").forEach(s=>[...s.children].forEach((e,i)=>e.style.setProperty("--i",i)));
-const inv=$("invite");inv.addEventListener("scroll",()=>{$("bgz").style.setProperty("--z",1+inv.scrollTop/Math.max(1,inv.scrollHeight-inv.clientHeight)*.3)},{passive:true});
+const inv=$("invite");inv.addEventListener("scroll",()=>{$("bgz").style.setProperty("--z",1+inv.scrollTop/Math.max(1,inv.scrollHeight-inv.clientHeight)*.3);document.querySelectorAll(".scroll").forEach(a=>a.classList.toggle("hide",inv.scrollTop>a.parentElement.offsetTop+40))},{passive:true});
 function startIO(){const sl=document.querySelectorAll(".slide");if(matchMedia("(prefers-reduced-motion:reduce)").matches){sl.forEach(s=>s.classList.add("in"));return}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("in")}),{root:inv,threshold:.3});sl.forEach(s=>io.observe(s))}
 const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -228,29 +191,27 @@ const DV='<svg class="dv" viewBox="0 0 80 50"><path d="M6 38C14 30 26 28 40 30C5
 for(let k=0;k<10;k++){const e=document.createElement("i");e.className="orb";e.style.cssText=`--s:${22+R()*44}px;--x:${R()*100}%;--dx:${R()*80-40}px;--d:${14+R()*12}s;--l:${-R()*20}s`;fx.append(e)}
 for(let k=0;k<14;k++){const e=document.createElement("i");e.className="st";e.style.cssText=`--s:${10+R()*16}px;left:${R()*100}%;top:${R()*60}%;--d:${2.5+R()*3}s;--l:${-R()*5}s`;fx.append(e)}}
 const env=$("env");
+function layout(){const W=env.clientWidth,H=env.clientHeight,s=Math.max(W/335,H/597),ox=(W-335*s)/2,oy=(H-597*s)/2,P=(x,y)=>[ox+x*s,oy+y*s],
+TL=P(0,0),TR=P(335,0),BL=P(0,597),BR=P(335,597),C=P(167.5,318.8),
+f=a=>"polygon("+a.map(q=>q[0].toFixed(1)+"px "+q[1].toFixed(1)+"px").join(",")+")",mv=a=>a.map(q=>[q[0],H-q[1]]),mh=a=>a.map(q=>[W-q[0],q[1]]),
+T=[TL,TR,C],B=[BL,BR,C],L=[TL,BL,C],R=[TR,BR,C],S=env.style.setProperty.bind(env.style),sl=P(164.5,318.5);
+S("--c-ft-a",f(T));S("--c-ft-b",f(mv(T)));S("--c-fb-a",f(B));S("--c-fb-b",f(mv(B)));S("--c-fL-a",f(L));S("--c-fL-b",f(mh(L)));S("--c-fR-a",f(R));S("--c-fR-b",f(mh(R)));
+S("--sx",sl[0]+"px");S("--sy",sl[1]+"px");S("--sw",131*s+"px")}
+layout();addEventListener("resize",layout);
 function burst(){if(calm)return;const w=$("sw");for(let k=0;k<16;k++){const e=document.createElement("i");e.className="gs";const a=Math.random()*Math.PI*2,r=30+Math.random()*90;
 e.style.cssText=`--s:${4+Math.random()*7}px;--dx:${Math.cos(a)*r}px;--dy:${Math.sin(a)*r-40-Math.random()*90}px;--dl:${Math.random()*.5}s`;w.append(e)}}
-function openIt(){const b=document.body.classList;if(b.contains("open"))return;b.add("open");burst();
+function openIt(){const b=document.body.classList;if(b.contains("open"))return;b.add("open");burst();music.start();
 const go=(k,ms,f)=>setTimeout(()=>{b.add(k);f&&f()},calm?0:ms);go("zoom",2750);go("reveal",3300,startIO);go("done",4700)}
+const music=(()=>{let ctx,master,out,on=true,go=false,next=0,bar=0;const M=n=>440*Math.pow(2,(n-69)/12),CH=[[50,54,57,62,66,69],[45,49,52,57,61,64],[47,50,54,59,62,66],[42,45,49,54,57,61],[43,47,50,55,59,62],[50,54,57,62,66,69],[43,47,50,55,59,62],[45,49,52,57,61,64]],ML=[78,76,74,73,71,69,71,73],AP=[0,2,3,5,3,4,3,2];
+function tone(f,t,d,v,ty,lp,att){const o=ctx.createOscillator(),g=ctx.createGain(),q=ctx.createBiquadFilter();q.type='lowpass';q.frequency.value=lp||2200;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+(att||.012));g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(q);q.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05)}
+function barAt(t,i){const c=CH[i%8];tone(M(c[0]-12),t,3.4,.16,'sine',600,.03);AP.forEach((k,s)=>tone(M(c[k]),t+s*.4,1.7,.1,'triangle',2400));[c[1],c[3],c[4]].forEach(n=>tone(M(n),t,3.6,.03,'sine',1200,1));tone(M(ML[i%8]),t+.02,3.2,.075,'sine',3000,.04);tone(M(ML[i%8]+12),t+.02,3,.012,'sine',4000,.04)}
+function tick(){while(next<ctx.currentTime+2.5){barAt(next,bar++);next+=3.2}}
+function ui(){const b=$('snd');b&&b.classList.toggle('off',!on)}
+function start(){if(go)return;try{ctx=new(window.AudioContext||window.webkitAudioContext)();ctx.resume&&ctx.resume();master=ctx.createGain();master.gain.setValueAtTime(0,ctx.currentTime);master.connect(ctx.destination);out=ctx.createGain();out.connect(master);const L=Math.floor(ctx.sampleRate*3.2),buf=ctx.createBuffer(2,L,ctx.sampleRate);for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<L;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/L,2.6)}const cv=ctx.createConvolver();cv.buffer=buf;const w=ctx.createGain();w.gain.value=.6;out.connect(cv);cv.connect(w);w.connect(master);master.gain.linearRampToValueAtTime(.55,ctx.currentTime+4);next=ctx.currentTime+.15;tick();setInterval(tick,500);go=true;ui()}catch(e){}}
+function toggle(){if(!go){start();return}on=!on;master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setTargetAtTime(on?.55:0,ctx.currentTime,.25);ui()}
+document.addEventListener('visibilitychange',()=>{if(!ctx)return;document.hidden?ctx.suspend():ctx.resume()});
+return{start,toggle}})();
+$('snd').addEventListener('click',e=>{e.stopPropagation();music.toggle()});
 env.addEventListener("click",openIt);
 env.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openIt()}});
-
-const scrollArrows = document.querySelectorAll(".scroll");
-const slides = document.querySelectorAll(".slide");
-const invite = document.getElementById("invite");
-
-invite.addEventListener("scroll", () => {
-  slides.forEach((slide, index) => {
-    const arrow = scrollArrows[index];
-    if (!arrow) return;
-
-    // Check if the slide has been scrolled past
-    const slideTop = slide.offsetTop - invite.scrollTop;
-    if (slideTop < -20) {
-      arrow.classList.add("hide");
-    } else {
-      arrow.classList.remove("hide");
-    }
-  });
-}, { passive: true });
 </script></body></html>
